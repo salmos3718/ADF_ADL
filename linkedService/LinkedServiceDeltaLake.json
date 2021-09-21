@@ -6,8 +6,8 @@
 		"type": "AzureDatabricksDeltaLake",
 		"typeProperties": {
 			"domain": "https://adb-7235625213198419.19.azuredatabricks.net/",
-			"clusterId": "0604-081828-raid794",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRGLUFETC1RQVFDUy1ERVYtQURGXzkzNzhhZjM5LWRmODAtNGQyYS1hYTliLTMwYzRkM2U4NmQyNCINCn0="
+			"clusterId": "0915-153329-beaus422",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRGLUFETC1RQVFDUy1ERVYtQURGXzMwZTg5N2VlLTFhM2MtNDcyNS1iOTk4LTc0MGJhZmUwNWRmNCINCn0="
 		}
 	}
 }

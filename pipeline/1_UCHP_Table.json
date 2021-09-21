@@ -151,16 +151,6 @@
 							},
 							{
 								"source": {
-									"name": "FUNCTIONGROUP",
-									"type": "string"
-								},
-								"sink": {
-									"name": "FUNCTION_GROUP_KEY",
-									"type": "string"
-								}
-							},
-							{
-								"source": {
 									"name": "HOURS"
 								},
 								"sink": {
@@ -494,16 +484,6 @@
 								},
 								"sink": {
 									"name": "CAUSAL_PART_NO_PREFIX_NO_WID",
-									"type": "string"
-								}
-							},
-							{
-								"source": {
-									"name": "DEFECTCODE",
-									"type": "string"
-								},
-								"sink": {
-									"name": "DEFECT_CODE_KEY",
 									"type": "string"
 								}
 							},

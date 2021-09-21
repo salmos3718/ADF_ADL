@@ -24,6 +24,7 @@
 					},
 					"sink": {
 						"type": "AzureDatabricksDeltaLakeSink",
+						"preCopyScript": "truncate table ds_qaqcs_dev.ods_uchp_claim_job",
 						"importSettings": {
 							"type": "AzureDatabricksDeltaLakeImportCommand"
 						}

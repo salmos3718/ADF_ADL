@@ -22,9 +22,21 @@
 							"type": "AzureDatabricksDeltaLakeExportCommand"
 						}
 					},
+					"sink": {
+						"type": "AzureDatabricksDeltaLakeSink",
+						"importSettings": {
+							"type": "AzureDatabricksDeltaLakeImportCommand"
+						}
+					},
 					"enableStaging": false
 				},
 				"inputs": [
+					{
+						"referenceName": "AzureDatabricksDeltaLakeDataset2",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
 					{
 						"referenceName": "AzureDatabricksDeltaLakeDataset2",
 						"type": "DatasetReference"

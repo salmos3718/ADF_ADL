@@ -2,14 +2,14 @@
 	"name": "AzureDatabricksDeltaLakeDataset2",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "GTT_Delta_Source",
+			"referenceName": "GTT_Delta_Destination",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "AzureDatabricksDeltaLakeDataset",
 		"typeProperties": {
-			"database": "ds_uchp",
-			"table": "claimjob_hist"
+			"database": "ds_qaqcs_dev",
+			"table": "ods_uchp_claim_job"
 		},
 		"schema": []
 	}

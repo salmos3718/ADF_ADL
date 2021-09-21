@@ -408,84 +408,140 @@
 								}
 							},
 							{
+								"source": {
+									"name": "REFJOBNOOWNER",
+									"type": "string"
+								},
 								"sink": {
 									"name": "REF_JOB_NO_OWNER",
 									"type": "string"
 								}
 							},
 							{
+								"source": {
+									"name": "CAUSALPARTDESCR",
+									"type": "string"
+								},
 								"sink": {
 									"name": "CAUSAL_PART_DESC",
 									"type": "string"
 								}
 							},
 							{
+								"source": {
+									"name": "CAUSALEXCHANGEPART",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "CAUSAL_EXCHANGE_PART",
 									"type": "Int64"
 								}
 							},
 							{
+								"source": {
+									"name": "AUTOFAILREASON",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "AUTO_FAIL_REASON",
 									"type": "Int64"
 								}
 							},
 							{
+								"source": {
+									"name": "UNPLANNEDSTOP",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "UNPLANNED_STOP",
 									"type": "Int64"
 								}
 							},
 							{
+								"source": {
+									"name": "TMASITEID",
+									"type": "string"
+								},
 								"sink": {
 									"name": "TMA_SITE_ID",
 									"type": "string"
 								}
 							},
 							{
+								"source": {
+									"name": "OPERATIONFORMAT",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "OPERATION_FORMAT",
 									"type": "Int64"
 								}
 							},
 							{
+								"source": {
+									"name": "CAUSALPARTNOWID",
+									"type": "string"
+								},
 								"sink": {
 									"name": "CAUSAL_PART_NO_WID",
 									"type": "string"
 								}
 							},
 							{
+								"source": {
+									"name": "CAUSALPARTNOPREFIXWID",
+									"type": "string"
+								},
 								"sink": {
 									"name": "CAUSAL_PART_NO_PREFIX_NO_WID",
 									"type": "string"
 								}
 							},
 							{
+								"source": {
+									"name": "DEFECTCODE",
+									"type": "string"
+								},
 								"sink": {
 									"name": "DEFECT_CODE_KEY",
 									"type": "string"
 								}
 							},
 							{
+								"source": {
+									"name": "CLAIMJOBSTATE_KEY",
+									"type": "string"
+								},
 								"sink": {
 									"name": "CLAIM_JOB_STATE_KEY",
 									"type": "string"
 								}
 							},
 							{
+								"source": {
+									"name": "FOLLOWUPCODE_KEY",
+									"type": "string"
+								},
 								"sink": {
 									"name": "FOLLOW_UP_CODE_KEY",
 									"type": "string"
 								}
 							},
 							{
+								"source": {
+									"name": "MATERIALINSTR_KEY",
+									"type": "string"
+								},
 								"sink": {
 									"name": "MATERIAL_INSTR_KEY",
 									"type": "string"
 								}
 							},
 							{
+								"source": {
+									"name": "TYPEOFCLAIMAUTH_KEY",
+									"type": "string"
+								},
 								"sink": {
 									"name": "TYPE_OF_CLAIM_AUTH_KEY",
 									"type": "string"

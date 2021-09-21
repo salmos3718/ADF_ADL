@@ -34,7 +34,7 @@
 							"referenceName": "vgadlqaqcssa01",
 							"type": "LinkedServiceReference"
 						},
-						"path": "staging/1d26379f-7ffb-424e-98be-bbbdb30a96df/ce5eabe0-7dac-4fbd-b6b6-4ee7aa04c77a"
+						"path": "staging/"
 					},
 					"translator": {
 						"type": "TabularTranslator",

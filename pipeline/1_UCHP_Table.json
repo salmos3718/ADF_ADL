@@ -36,6 +36,7 @@
 						},
 						"path": "staging"
 					},
+					"enableSkipIncompatibleRow": true,
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [

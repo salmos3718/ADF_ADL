@@ -34,7 +34,7 @@
 							"referenceName": "vgadlqaqcssa01",
 							"type": "LinkedServiceReference"
 						},
-						"path": "staging/"
+						"path": "staging"
 					},
 					"translator": {
 						"type": "TabularTranslator",

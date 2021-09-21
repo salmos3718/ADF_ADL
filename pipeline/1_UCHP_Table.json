@@ -150,6 +150,10 @@
 								}
 							},
 							{
+								"source": {
+									"name": "FUNCTIONGROUP",
+									"type": "string"
+								},
 								"sink": {
 									"name": "FUNCTION_GROUP_KEY",
 									"type": "string"
@@ -164,36 +168,60 @@
 								}
 							},
 							{
+								"source": {
+									"name": "JOBNO",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "JOB_NO",
 									"type": "Int64"
 								}
 							},
 							{
+								"source": {
+									"name": "MATERIALINSTR",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "MATERIAL_INSTR",
 									"type": "Int64"
 								}
 							},
 							{
+								"source": {
+									"name": "MATERIALINSTRDATE",
+									"type": "string"
+								},
 								"sink": {
 									"name": "MATERIAL_INSTR_DATE",
 									"type": "DateTime"
 								}
 							},
 							{
+								"source": {
+									"name": "MTRLREQID",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "MTRL_REQ_ID",
 									"type": "Int64"
 								}
 							},
 							{
+								"source": {
+									"name": "MIPRINTSTATUS",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "MI_PRINT_STATUS",
 									"type": "Int64"
 								}
 							},
 							{
+								"source": {
+									"name": "MIPRINTSTATUSDATE",
+									"type": "string"
+								},
 								"sink": {
 									"name": "MI_PRINT_STATUS_DATE",
 									"type": "DateTime"

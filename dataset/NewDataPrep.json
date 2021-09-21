@@ -1,0 +1,17 @@
+{
+	"name": "NewDataPrep",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LinkedServiceDeltaLake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureDatabricksDeltaLakeDataset",
+		"typeProperties": {
+			"database": "ds_lda",
+			"table": "f_apm_detail"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

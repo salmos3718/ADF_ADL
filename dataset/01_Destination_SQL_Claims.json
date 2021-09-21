@@ -1,0 +1,17 @@
+{
+	"name": "01_Destination_SQL_Claims",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CLAIMS"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

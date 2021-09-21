@@ -1,0 +1,9 @@
+{
+	"name": "df-adl-qaqcs-dev-adf",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "a4537a8e-08d7-43fb-a222-0d7a650f8f1b",
+		"tenantId": "f25493ae-1c98-41d7-8a33-0be75f5fe603"
+	}
+}

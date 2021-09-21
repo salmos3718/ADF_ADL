@@ -1,0 +1,17 @@
+{
+	"name": "03_Destination_SQL_Vehicle",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "LDA"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

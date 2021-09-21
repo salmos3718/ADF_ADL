@@ -1,0 +1,17 @@
+{
+	"name": "02_Destination_SQL_UCHP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "UCHP"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

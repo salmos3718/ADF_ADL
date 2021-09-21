@@ -1,0 +1,62 @@
+{
+	"name": "DataBricks_Load_Murilo_Notebook",
+	"properties": {
+		"activities": [
+			{
+				"name": "Load-databricks_Murilo",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/murilo.costa@volvo.com/Load ODS Tables DEV",
+					"baseParameters": {
+						"target_db": "ds_qaqcs_dev",
+						"target_tab": "ODS_UCHP_CLAIM_JOB",
+						"source_db": "ds_uchp",
+						"source_tab": "claimjob_hist",
+						"source_system": "UCHP",
+						"load_mode": "FULL",
+						"incr_col": "BATCH_ID"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricksLinkedService",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "LOAD",
+					"value": "Y"
+				}
+			}
+		],
+		"variables": {
+			"LOAD": {
+				"type": "String",
+				"defaultValue": "Y"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-14T12:25:45Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,22 @@
+{
+	"name": "02_Source_Parque_UCHP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "STOV_UCHP_STORAGECLAIMJOBTMA_ACT",
+				"folderPath": "netezza/UCHP",
+				"container": "qaqcs"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

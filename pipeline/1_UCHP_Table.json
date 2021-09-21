@@ -28,7 +28,560 @@
 							"type": "AzureDatabricksDeltaLakeImportCommand"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CLAIM_JOB_KEY",
+									"type": "string"
+								},
+								"sink": {
+									"name": "CLAIM_JOB_KEY",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "CLAIM_REPAIR_HEADER_KEY",
+									"type": "string"
+								},
+								"sink": {
+									"name": "CLAIM_REPAIR_HEADER_KEY",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "HEAD_COMPANY_NO",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "HEAD_COMPANY_NO",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "CAUSAL_PART_NO",
+									"type": "string"
+								},
+								"sink": {
+									"name": "CAUSAL_PART_NO",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "CAUSAL_PART_NO_PREFIX",
+									"type": "string"
+								},
+								"sink": {
+									"name": "CAUSAL_PART_NO_PREFIX",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "CLAIM_VALID_OCC_ID",
+									"type": "string"
+								},
+								"sink": {
+									"name": "CLAIM_VALID_OCC_ID",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "CLAIM_JOB_STATE",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "CLAIM_JOB_STATE",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "DEFECT_CODE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "DEFECT_CODE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "FOLLOW_UP_CODE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "FOLLOW_UP_CODE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "FORCED",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "FORCED",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "FUNCTION_GROUP",
+									"type": "string"
+								},
+								"sink": {
+									"name": "FUNCTION_GROUP",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "FUNCTION_GROUP_KEY",
+									"type": "string"
+								},
+								"sink": {
+									"name": "FUNCTION_GROUP_KEY",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "HOURS"
+								},
+								"sink": {
+									"name": "HOURS"
+								}
+							},
+							{
+								"source": {
+									"name": "JOB_NO",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "JOB_NO",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "MATERIAL_INSTR",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "MATERIAL_INSTR",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "MATERIAL_INSTR_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "MATERIAL_INSTR_DATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "MTRL_REQ_ID",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "MTRL_REQ_ID",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "MI_PRINT_STATUS",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "MI_PRINT_STATUS",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "MI_PRINT_STATUS_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "MI_PRINT_STATUS_DATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "PARTS_FITTED_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "PARTS_FITTED_DATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "PART_AGE",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "PART_AGE",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "PART_MILEAGE",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "PART_MILEAGE",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "PART_OPERATING_HOURS",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "PART_OPERATING_HOURS",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "REGISTRATION_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "REGISTRATION_DATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "REMARK_CAUSE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "REMARK_CAUSE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "REMARK_COMPLAINT",
+									"type": "string"
+								},
+								"sink": {
+									"name": "REMARK_COMPLAINT",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "REMARK_CORRECTION",
+									"type": "string"
+								},
+								"sink": {
+									"name": "REMARK_CORRECTION",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "REPAIRED",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "REPAIRED",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "SCC",
+									"type": "string"
+								},
+								"sink": {
+									"name": "SCC",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "SERIAL_NO_CAUSAL",
+									"type": "string"
+								},
+								"sink": {
+									"name": "SERIAL_NO_CAUSAL",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "SUPPLIER_NO",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "SUPPLIER_NO",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "TYPE_OF_CLAIM",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "TYPE_OF_CLAIM",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "TYPE_OF_CONCERN",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "TYPE_OF_CONCERN",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "COVERAGE_ID",
+									"type": "string"
+								},
+								"sink": {
+									"name": "COVERAGE_ID",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "HEAD_CLAIM_HEADER_ID",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "HEAD_CLAIM_HEADER_ID",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "NOTE_TO_DEALER",
+									"type": "string"
+								},
+								"sink": {
+									"name": "NOTE_TO_DEALER",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "REF_JOB_NO",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "REF_JOB_NO",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "REF_JOB_NO_OWNER",
+									"type": "string"
+								},
+								"sink": {
+									"name": "REF_JOB_NO_OWNER",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "CAUSAL_PART_DESC",
+									"type": "string"
+								},
+								"sink": {
+									"name": "CAUSAL_PART_DESC",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "CAUSAL_EXCHANGE_PART",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "CAUSAL_EXCHANGE_PART",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "AUTO_FAIL_REASON",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "AUTO_FAIL_REASON",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "UNPLANNED_STOP",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "UNPLANNED_STOP",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "TMA_SITE_ID",
+									"type": "string"
+								},
+								"sink": {
+									"name": "TMA_SITE_ID",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "OPERATION_FORMAT",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "OPERATION_FORMAT",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "CAUSAL_PART_NO_WID",
+									"type": "string"
+								},
+								"sink": {
+									"name": "CAUSAL_PART_NO_WID",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "CAUSAL_PART_NO_PREFIX_NO_WID",
+									"type": "string"
+								},
+								"sink": {
+									"name": "CAUSAL_PART_NO_PREFIX_NO_WID",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "DEFECT_CODE_KEY",
+									"type": "string"
+								},
+								"sink": {
+									"name": "DEFECT_CODE_KEY",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "CLAIM_JOB_STATE_KEY",
+									"type": "string"
+								},
+								"sink": {
+									"name": "CLAIM_JOB_STATE_KEY",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "FOLLOW_UP_CODE_KEY",
+									"type": "string"
+								},
+								"sink": {
+									"name": "FOLLOW_UP_CODE_KEY",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "MATERIAL_INSTR_KEY",
+									"type": "string"
+								},
+								"sink": {
+									"name": "MATERIAL_INSTR_KEY",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "TYPE_OF_CLAIM_AUTH_KEY",
+									"type": "string"
+								},
+								"sink": {
+									"name": "TYPE_OF_CLAIM_AUTH_KEY",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "BATCH_ID",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "BATCH_ID",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "RECORD_STATUS",
+									"type": "string"
+								},
+								"sink": {
+									"name": "RECORD_STATUS",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "SOURCE_LOAD_DATETIME",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "SOURCE_LOAD_DATETIME",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "ODS_LOAD_DATETIME",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "ODS_LOAD_DATETIME",
+									"type": "DateTime"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{

@@ -1,0 +1,24 @@
+{
+	"name": "out_qaqcs_vda_prod_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "vgadlqaqcssa01",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "copy_adl_prod_data"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "adldump/vda/raw/d_vehicle",
+				"fileSystem": "qaqcs"
+			},
+			"compressionCodec": "none"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

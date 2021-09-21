@@ -1,0 +1,12 @@
+{
+	"name": "vgadlirdev01",
+	"properties": {
+		"type": "SelfHosted",
+		"typeProperties": {
+			"linkedInfo": {
+				"resourceId": "/subscriptions/d4b1a742-d22b-4598-975b-f7d380af08da/resourceGroups/vg-adl-common-dev-rg/providers/Microsoft.DataFactory/factories/vg-adl-dev-adf/integrationruntimes/vgadlirdev01",
+				"authorizationType": "Rbac"
+			}
+		}
+	}
+}

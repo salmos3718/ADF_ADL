@@ -1,0 +1,30 @@
+{
+	"name": "CSV_US2_list",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "vgadlqaqcssa01",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "US2_list.csv",
+				"folderPath": "US2-Test",
+				"fileSystem": "qaqcs"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "tablename\r",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

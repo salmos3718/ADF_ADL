@@ -1,0 +1,258 @@
+{
+	"name": "EDW2ADL_Table_Transfert",
+	"properties": {
+		"activities": [
+			{
+				"name": "nb_of_rows_in_table",
+				"description": "Return the number of rows in the table to know if it needs to be sliced.",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OdbcSource",
+						"query": {
+							"value": "SELECT count(*)\nFROM @{pipeline().parameters.database}@{pipeline().parameters.table}",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "EDWPROD_STOV_UCHP",
+						"type": "DatasetReference",
+						"parameters": {
+							"tablename": "toto"
+						}
+					}
+				}
+			},
+			{
+				"name": "If table is small",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Set nb of buckets",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(variables('nbofbuckets'),'1')",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Execute EDW2ADL_Sub_Big_Table",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "EDW2ADL_Table_Transfert_Sub_Big_Table",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"nbofbuckets": {
+										"value": "@int(variables('nbofbuckets'))",
+										"type": "Expression"
+									},
+									"tablename": {
+										"value": "@pipeline().parameters.table",
+										"type": "Expression"
+									},
+									"databasename": {
+										"value": "@pipeline().parameters.database",
+										"type": "Expression"
+									},
+									"storageparentdirname": {
+										"value": "@pipeline().parameters.storageparentdir",
+										"type": "Expression"
+									},
+									"nbofrowsmax": {
+										"value": "@int(variables('nbofrowsmax'))",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "EDW2ADL Copy table to UCHP",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "OdbcSource",
+									"queryTimeout": "02:00:00"
+								},
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "EDW2ADL_Source",
+									"type": "DatasetReference",
+									"parameters": {
+										"tablename": {
+											"value": "@pipeline().parameters.table",
+											"type": "Expression"
+										},
+										"databasename": {
+											"value": "@pipeline().parameters.database",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "EDW2ADL_Sink_Parquet",
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@pipeline().parameters.table",
+											"type": "Expression"
+										},
+										"dirname": {
+											"value": "@pipeline().parameters.table",
+											"type": "Expression"
+										},
+										"parentdirname": {
+											"value": "@pipeline().parameters.storageparentdir",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "Set nb of buckets",
+				"description": "if the table number of rows is higher 900 000 lines, it counts the number of buckets needed to extract",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "nb_of_rows_in_table",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set max nb of rows per query",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "nbofbuckets",
+					"value": {
+						"value": "@string(add(div(int(activity('nb_of_rows_in_table').output.firstRow.COUNT),int(variables('nbofrowsmax'))),1))\n",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set max nb of rows per query",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "nbofrowsmax",
+					"value": {
+						"value": "5000000",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"table": {
+				"type": "string",
+				"defaultValue": "STOV_VDA_DB2_VEHICLE_BIZ_HIST"
+			},
+			"storageparentdir": {
+				"type": "string",
+				"defaultValue": "qaqcs/netezza/VDA/parquet"
+			},
+			"database": {
+				"type": "string",
+				"defaultValue": "PROD_EDW_STOV.PROD_EDW_WHERESCAPE."
+			}
+		},
+		"variables": {
+			"nbofbuckets": {
+				"type": "String"
+			},
+			"tablename": {
+				"type": "String"
+			},
+			"fieldkey": {
+				"type": "String"
+			},
+			"minid": {
+				"type": "String"
+			},
+			"maxid": {
+				"type": "String"
+			},
+			"id": {
+				"type": "String"
+			},
+			"query": {
+				"type": "String"
+			},
+			"cond": {
+				"type": "String"
+			},
+			"nbofrowsmax": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "EDW2ADL"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-15T15:42:38Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,5 +1,5 @@
 {
-	"name": "AzureDatabricksDeltaLake1",
+	"name": "QAQCS_Delta_Target",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],

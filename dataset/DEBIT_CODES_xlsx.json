@@ -1,15 +1,18 @@
 {
-	"name": "AzureDatabricksDeltaLakeDataset1",
+	"name": "DEBIT_CODES_xlsx",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "QAQCS_Delta_Target",
+			"referenceName": "HttpServer1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "AzureDatabricksDeltaLakeDataset",
+		"type": "Excel",
 		"typeProperties": {
-			"database": "ds_vehicle",
-			"table": "d_vehicle"
+			"sheetName": "DEBIT_CODES",
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"firstRowAsHeader": true
 		},
 		"schema": []
 	},

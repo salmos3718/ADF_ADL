@@ -1,0 +1,20 @@
+{
+	"name": "GTT_SWR_PARTCORRECT_xlsx",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "GTT_SWR_PARTCORRECT_link",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,348 @@
+{
+	"name": "EDW2ADL_Generic_full",
+	"properties": {
+		"activities": [
+			{
+				"name": "nbofrows",
+				"description": "Return the number of rows in the table to know if it needs to be sliced.",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Get Table Name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OdbcSource",
+						"query": {
+							"value": "SELECT count(*)\nFROM PROD_EDW_STOV.PROD_EDW_WHERESCAPE.@{variables('tablename')}\n",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "EDWPROD_STOV_UCHP",
+						"type": "DatasetReference",
+						"parameters": {
+							"tablename": "toto"
+						}
+					}
+				}
+			},
+			{
+				"name": "Set nb of buckets",
+				"description": "if the table number of rows is higher 900 000 lines, it counts the number of buckets needed to extract",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "nbofrows",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "nbofbuckets",
+					"value": {
+						"value": "@string(add(div(int(activity('nbofrows').output.firstRow.COUNT),9000000),1))",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Get Table Name",
+				"description": "Enter the name of the table you want to extract",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tablename",
+					"value": "STOV_UCHP_CLAIMJOBSUPPLEMENT_ACT"
+				}
+			},
+			{
+				"name": "tablepartitions",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Set nb of buckets",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Get Filtering Key",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OdbcSource",
+						"query": {
+							"value": "WITH slicetable as(\n\tselect\n\t\t@{variables('fieldkey')},\n\t\tNTILE (@{variables('nbofbuckets')}) OVER (ORDER BY @{variables('fieldkey')}) buckets\n\tFROM PROD_EDW_STOV.PROD_EDW_WHERESCAPE.@{variables('tablename')}\n)\nSELECT \n\tbuckets,\n\tmin(@{variables('fieldkey')}) as minid,\n        max(@{variables('fieldkey')}) as maxid\nFROM slicetable\ngroup by buckets",
+							"type": "Expression"
+						},
+						"queryTimeout": {
+							"value": "120",
+							"type": "Expression"
+						}
+					},
+					"dataset": {
+						"referenceName": "EDWPROD_STOV_UCHP",
+						"type": "DatasetReference",
+						"parameters": {
+							"tablename": "toto"
+						}
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Get Filtering Key",
+				"description": "",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "fieldkey",
+					"value": "HUB_CLAIMJOBSUPPLEMENT_SID"
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "tablepartitions",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('tablepartitions').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Set Min ID",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "minid",
+								"value": {
+									"value": "@{item().MINID}",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set Max ID",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "maxid",
+								"value": {
+									"value": "@{item().MAXID}",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set Bucket ID",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "id",
+								"value": {
+									"value": "@{item().BUCKETS}",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set Query",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Set Bucket ID",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Set Max ID",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Set Min ID",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "query",
+								"value": {
+									"value": "SELECT * \nFROM PROD_EDW_STOV.PROD_EDW_WHERESCAPE.@{variables('tablename')}\nwhere @{variables('fieldkey')} >= @{variables('minid')}\nand @{variables('fieldkey')} <= @{variables('maxid')}",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Copy Netezza STOV_UCHP to ADL_copy1_copy1",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "Set Query",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "OdbcSource",
+									"query": {
+										"value": "@variables('query')",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00"
+								},
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "EDWPROD_STOV_UCHP",
+									"type": "DatasetReference",
+									"parameters": {
+										"tablename": "toto"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "Netezza_Stov_UCHP_parquet_copy",
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@{variables('tablename')}_@{variables('id')}",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(variables('nbofbuckets'),1)",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"tablename2": {
+				"type": "string",
+				"defaultValue": "toto"
+			},
+			"fieldkey2": {
+				"type": "string",
+				"defaultValue": "toto"
+			}
+		},
+		"variables": {
+			"nbofbuckets": {
+				"type": "String"
+			},
+			"tablename": {
+				"type": "String"
+			},
+			"fieldkey": {
+				"type": "String"
+			},
+			"minid": {
+				"type": "String"
+			},
+			"maxid": {
+				"type": "String"
+			},
+			"id": {
+				"type": "String"
+			},
+			"query": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "EDW2ADL/Old"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-15T15:42:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

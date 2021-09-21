@@ -1,0 +1,898 @@
+{
+	"name": "qaqcs_ClaimProducts",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "qaqcs_sql01_db01",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "WIS_CLAIM_JOB_RECID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "WIS_CLAIM_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "WIS_REP_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "WIS_PRODUCT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "WIS_SWV_RECID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PRODUCT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REPAIR_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CLAIM_JOB_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CLAIMING_COMPANY_CD",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CLAIMING_COMPANY_DESC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BA",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REP_IMP",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REP_IMP_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REP_DEALER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REP_DEALER_SIGA",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REP_DEALER_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REP_MAIN_DEALER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REF_NO",
+				"type": "nvarchar"
+			},
+			{
+				"name": "JOB_NO",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REP_DIVISION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REP_SUB_DIVISION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REP_REGION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REP_STATE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REP_COUNTRY_REGION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SERVICE_DEALER_CITY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REP_CONTINENT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REP_REGION_GEO",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REP_CNTRY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CLAIM_PROC_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CLAIM_HANDLER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "RETURN_CLAIM_HANDLER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DEF_1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DEF_1_DESC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DEF_CD",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DEF_CD_DESC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FGRP1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TREAD_GRP",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FGRP1_DESC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FGRP2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FGRP2_DESC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FGRP3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FGRP3_DESC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FGRP4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FGRP4_DESC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FGRP_KOLA",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BUSINESS_UNIT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CRITICALITY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PART_PREFIX_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PART_NO",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PART_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PART_NO_NEW",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PART_NO_Q",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PART_NO_NEW_Q",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PART_CD",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PART_NOTE_QJ",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PART_AGE",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "PART_MILEAGE",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SERIAL_NO",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SERIAL_NO_VDA",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VEH_AGE_CLAIM",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MILEAGE_KM_CLAIM",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MAIN_OP",
+				"type": "nvarchar"
+			},
+			{
+				"name": "MAIN_OP_DESC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VST",
+				"type": "nvarchar"
+			},
+			{
+				"name": "USED_TIME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TOT_USED_TIME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CLAIM_EVAL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STATUS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FOLLOW_UP_CD",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AGREE_NO",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COV_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REASON_CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SUPPL_NO",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SUPPL_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SWR_HANDLER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SUPPL_PRICE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CUR_LOCAL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TOT_PAYMENT_REF",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LABOR_PAYMENT_LOCAL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "MTR_PAYMENT_LOCAL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OTHER_PAYMENT_LOCAL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TOT_PAYMENT_LOCAL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LABOR_PAYMENT_SEK",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "MTR_PAYMENT_SEK",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "OTHER_PAYMENT_SEK",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_PAYMENT_SEK",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_LABOR_PAYMENT_LOCAL",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_MTR_PAYMENT_LOCAL",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_OTHER_PAYMENT_LOCAL",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_TRAVEL_PAYMENT_LOCAL",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_CLAIM_PAYMENT_LOCAL",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_LABOR_PAYMENT_SEK",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_MTR_PAYMENT_SEK",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_OTHER_PAYMENT_SEK",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_TRAVEL_PAYMENT_SEK",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_CLAIM_PAYMENT_SEK",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_LABOR_PAYMENT_EUR",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_MTR_PAYMENT_EUR",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_OTHER_PAYMENT_EUR",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_TRAVEL_PAYMENT_EUR",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_CLAIM_PAYMENT_EUR",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_LABOR_PAYMENT_USD",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_MTR_PAYMENT_USD",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_OTHER_PAYMENT_USD",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_TRAVEL_PAYMENT_USD",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_CLAIM_PAYMENT_USD",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_LABOR_PAYMENT_GBP",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_MTR_PAYMENT_GBP",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_OTHER_PAYMENT_GBP",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_TRAVEL_PAYMENT_GBP",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_CLAIM_PAYMENT_GBP",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_LABOR_PAYMENT_BRL",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_MTR_PAYMENT_BRL",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_OTHER_PAYMENT_BRL",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_TRAVEL_PAYMENT_BRL",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TOT_CLAIM_PAYMENT_BRL",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "DEB_CD",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DEB_CD_RT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DEB_CD_DESC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CLAIM_CATEGORY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TYPE_OF_CONCERN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TYPE_OF_CLAIM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "WARRANTY_TYPE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CLAIM_JOB_STATUS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PAY_CD",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CRED_FLAG",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CLAIM_STATUS_DETAIL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REP_DATE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REP_MON",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CLAIM_REG_DATE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FIRST_RELEASED_DATE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LAST_RELEASED_DATE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "READY_FOR_CREDITING_DATE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CRED_DATE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CRED_YEAR",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CRED_NOTE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NO_OF_CLAIM_JOBS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NO_OF_UNPAID_CLAIMS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NO_OF_REPS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CLAIM_HANDLING_DECISION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NO_VEHICLE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CLAIM_CUST_NO",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CLAIM_CUST_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CHASSIS_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CHASSIS_SERIES",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CHASSIS_NO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "COMPANY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BRAND",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VEH_GENERATION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VEH_TYPE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "MODEL_YEAR",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VEH_MRK_TYPE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VEH_MRK_TYPE_DESC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DEL_IMP",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DEL_IMP_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DEL_DEALER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DEL_DEALER_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DEL_MAIN_DEALER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "HOME_REP_DEL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SHIP_TO_DEALER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DEL_CNTRY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CNTRY_OF_OP",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TYPE_OF_CUSTOMER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CUST_NO",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CUST_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BUYING_CUST_NO",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "SALES_PERSON_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SALES_PERSON",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ORDER_NUMBER",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "UNIT_NO",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VEH_ASSEMB_YEAR",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "INS_DATE",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "INS_YEAR",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VEH_AGE",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ENGINE_PLANT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VEH_ASSEMB_MAIN_PLANT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VEH_ASSEMB_MAIN_PLANT_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VEH_ASSEMB_FINAL_PLANT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VEH_ASSEMB_FINAL_PLANT_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AXLE_ARRANGEMENT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CHASSIS_HEIGHT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CHASSIS_TYPE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CLIMATE_UNIT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COMPRESSOR_CAPACITY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COOLING_CAPACITY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EATS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FIFTH_WHEEL_MOUNTING",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FIFTH_WHEEL_TYPE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FRONT_SPRING_SYSTEM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FUEL_TANK_LH",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FUEL_TANK_RH",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GCW",
+				"type": "nvarchar"
+			},
+			{
+				"name": "HYDRAULIC_PUMP_ENGINE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "HYDRAULIC_PUMP_GEARBOX",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INSTRUMENTATION_LEVEL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "MUFFLER_ORIENTATION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PARKING_HEATER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "POWER_STEERING_SYSTEM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "RETARDER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STEERING_GEAR_RATIO",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STEERING_WHEEL_POSITION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "WHEEL_BASE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "WHEEL_BRAKE_TYPE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "APPL_TYPE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VEH_APPLICATION",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "VIN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BUYING_CUST_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CRED_DATE2",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "F_CLAIM_PRODUCT_DETAIL3"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,24 @@
+{
+	"name": "SharePointOnlineListResource_QAQCS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SharePointOnlineList_Linked_Service",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"ListName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SharePointOnlineListResource",
+		"schema": [],
+		"typeProperties": {
+			"listName": {
+				"value": "@dataset().listname",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

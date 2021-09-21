@@ -1,0 +1,9 @@
+{
+	"name": "vg-adl-qaqcs-dev-adf",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "35445fa3-b320-4565-9c66-4a89bca2ef95",
+		"tenantId": "f25493ae-1c98-41d7-8a33-0be75f5fe603"
+	}
+}

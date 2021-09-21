@@ -1,0 +1,230 @@
+{
+	"name": "EDW2ADL_Table_Transfert_Sub_Big_Table",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Set ID array",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('id_array')",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Set ID",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "id",
+								"value": {
+									"value": "@string(item())",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set Query",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Set factor",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "query",
+								"value": {
+									"value": "SELECT * \nFROM @{pipeline().parameters.databasename}@{pipeline().parameters.tablename}\nLIMIT @{pipeline().parameters.nbofrowsmax} OFFSET @{variables('factor')}",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Copy Netezza to ADL",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "Set Query",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "OdbcSource",
+									"query": {
+										"value": "@variables('query')",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00"
+								},
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "EDW2ADL_Source",
+									"type": "DatasetReference",
+									"parameters": {
+										"tablename": {
+											"value": "@pipeline().parameters.tablename",
+											"type": "Expression"
+										},
+										"databasename": {
+											"value": "@pipeline().parameters.databasename",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "EDW2ADL_Sink_Parquet",
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@{pipeline().parameters.tablename}_@{variables('id')}",
+											"type": "Expression"
+										},
+										"dirname": {
+											"value": "@pipeline().parameters.tablename",
+											"type": "Expression"
+										},
+										"parentdirname": {
+											"value": "@pipeline().parameters.storageparentdirname",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "Set factor",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Set ID",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "factor",
+								"value": {
+									"value": "@string(mul(int(variables('id')),pipeline().parameters.nbofrowsmax))",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Set ID array",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "id_array",
+					"value": {
+						"value": "@range(0, pipeline().parameters.nbofbuckets)",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"nbofbuckets": {
+				"type": "int",
+				"defaultValue": 6
+			},
+			"tablename": {
+				"type": "string",
+				"defaultValue": "STOV_VDA_DB2_VEHICLE_CAMPAIGN_ACT"
+			},
+			"databasename": {
+				"type": "string",
+				"defaultValue": "PROD_EDW_STOV.PROD_EDW_WHERESCAPE."
+			},
+			"storageparentdirname": {
+				"type": "string",
+				"defaultValue": "qaqcs/netezza/VDA/parquet"
+			},
+			"nbofrowsmax": {
+				"type": "int",
+				"defaultValue": 5000000
+			}
+		},
+		"variables": {
+			"minid": {
+				"type": "String"
+			},
+			"maxid": {
+				"type": "String"
+			},
+			"id": {
+				"type": "String"
+			},
+			"query": {
+				"type": "String"
+			},
+			"id_array": {
+				"type": "Array"
+			},
+			"factor": {
+				"type": "String"
+			},
+			"test_array": {
+				"type": "Array"
+			}
+		},
+		"folder": {
+			"name": "EDW2ADL"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-15T15:42:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

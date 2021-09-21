@@ -1,0 +1,337 @@
+{
+	"name": "Test_Netezza_STOV_UCHP_CASESOURCE_ACT_to_ADL",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy Netezza STOV_UCHP_CASESOURCE_ACT to ADL",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Set tablename",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OdbcSource",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "HUB_CASESOURCE_SID",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "HUB_CASESOURCE_SID",
+									"type": "Int64",
+									"physicalType": "INT_64"
+								}
+							},
+							{
+								"source": {
+									"name": "CASESOURCE_KEY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CASESOURCE_KEY",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CASENOSOURCEID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CASENOSOURCEID",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "COMPANYNO",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "COMPANYNO",
+									"type": "Int64",
+									"physicalType": "INT_64"
+								}
+							},
+							{
+								"source": {
+									"name": "TYPEOFCONCERN",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "TYPEOFCONCERN",
+									"type": "Int64",
+									"physicalType": "INT_64"
+								}
+							},
+							{
+								"source": {
+									"name": "CODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CODE",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "DESCRIPTION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DESCRIPTION",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "NAME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NAME",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "IBMSNAP_INTENTSEQ",
+									"type": "String"
+								},
+								"sink": {
+									"name": "IBMSNAP_INTENTSEQ",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "IBMSNAP_COMMITSEQ",
+									"type": "String"
+								},
+								"sink": {
+									"name": "IBMSNAP_COMMITSEQ",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "IBMSNAP_OPERATION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "IBMSNAP_OPERATION",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "IBMSNAP_LOGMARKER",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "IBMSNAP_LOGMARKER",
+									"type": "DateTime",
+									"physicalType": "INT_96"
+								}
+							},
+							{
+								"source": {
+									"name": "EDW_CHECKSUM",
+									"type": "String"
+								},
+								"sink": {
+									"name": "EDW_CHECKSUM",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "EDW_DQ_INFO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "EDW_DQ_INFO",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "RECORD_STATUS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "RECORD_STATUS",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "RECORD_SOURCE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "RECORD_SOURCE",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "BATCH_ID",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "BATCH_ID",
+									"type": "Int64",
+									"physicalType": "INT_64"
+								}
+							},
+							{
+								"source": {
+									"name": "LOAD_ST_DATETIME",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "LOAD_ST_DATETIME",
+									"type": "DateTime",
+									"physicalType": "INT_96"
+								}
+							},
+							{
+								"source": {
+									"name": "LOAD_END_DATETIME",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "LOAD_END_DATETIME",
+									"type": "DateTime",
+									"physicalType": "INT_96"
+								}
+							},
+							{
+								"source": {
+									"name": "DV_CURRENT_FLAG",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DV_CURRENT_FLAG",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "DV_VERSION",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "DV_VERSION",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "LOAD_DATETIME",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "LOAD_DATETIME",
+									"type": "DateTime",
+									"physicalType": "INT_96"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "EDWPROD_STOV_UCHP_CASESOURCE_ACT",
+						"type": "DatasetReference",
+						"parameters": {
+							"tablename": {
+								"value": "@variables('tablename')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "STOV_UCHP_CASESOURCE_ACT_parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": "STOV_UCHP_CASESOURCE_ACT_parquet"
+						}
+					}
+				]
+			},
+			{
+				"name": "Set tablename",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tablename",
+					"value": "\"STOV_UCHP_CASESOURCE_ACT\""
+				}
+			}
+		],
+		"variables": {
+			"tablename": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "EDW2ADL/Old"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-15T15:42:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

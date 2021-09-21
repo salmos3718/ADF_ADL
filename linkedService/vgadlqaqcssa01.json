@@ -1,19 +1,18 @@
 {
-	"name": "AzureDatabricksDeltaLake1",
+	"name": "vgadlqaqcssa01",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
-		"type": "AzureDatabricksDeltaLake",
+		"type": "AzureBlobFS",
 		"typeProperties": {
-			"domain": "https://adb-7235625213198419.19.azuredatabricks.net",
-			"clusterId": "0915-153329-beaus422",
-			"accessToken": {
+			"url": "https://vgadlqaqcsdevsa01.dfs.core.windows.net",
+			"accountKey": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
 					"referenceName": "qaqcs_key_vault",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "db-token"
+				"secretName": "vgadlqaqcssa01-account-key"
 			}
 		}
 	}

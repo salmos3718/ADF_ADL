@@ -1,0 +1,39 @@
+{
+	"name": "EDW2ADL_Sink_VDA_Parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "vgadlqaqcssa01",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			},
+			"dirname": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "EDW2ADL"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "netezza/VDA/parquet/@{dataset().dirname}/",
+					"type": "Expression"
+				},
+				"fileSystem": "qaqcs"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

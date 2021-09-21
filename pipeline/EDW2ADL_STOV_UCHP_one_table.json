@@ -1,0 +1,96 @@
+{
+	"name": "EDW2ADL_STOV_UCHP_one_table",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy Netezza STOV_UCHP to ADL",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Set tablename",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OdbcSource",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "EDWPROD_STOV_UCHP",
+						"type": "DatasetReference",
+						"parameters": {
+							"tablename": {
+								"value": "@variables('tablename')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Netezza_Stov_UCHP_parquet_copy",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@variables('tablename')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "Set tablename",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tablename",
+					"value": "STOV_UCHP_CLAIMRETURN_ACT"
+				}
+			}
+		],
+		"variables": {
+			"tablename": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "EDW2ADL/Old"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-15T15:42:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

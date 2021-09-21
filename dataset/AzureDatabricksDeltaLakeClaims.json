@@ -1,0 +1,202 @@
+{
+	"name": "AzureDatabricksDeltaLakeClaims",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDatabricksDeltaLake1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureDatabricksDeltaLakeDataset",
+		"typeProperties": {
+			"database": "ds_qaqcs_us4",
+			"table": "d_claims"
+		},
+		"schema": [
+			{
+				"name": "VEHICLE_KEY",
+				"type": "string"
+			},
+			{
+				"name": "NATURAL_PRODUCT_ID",
+				"type": "string"
+			},
+			{
+				"name": "NATURAL_REPAIR_ID",
+				"type": "string"
+			},
+			{
+				"name": "NATURAL_CLAIM_JOB_ID",
+				"type": "string"
+			},
+			{
+				"name": "CLAIM_ID",
+				"type": "string"
+			},
+			{
+				"name": "CLAIM_JOB_ID",
+				"type": "string"
+			},
+			{
+				"name": "CAUSAL_PART_NO",
+				"type": "string"
+			},
+			{
+				"name": "MATERIAL_INSTR",
+				"type": "string"
+			},
+			{
+				"name": "HOURS",
+				"type": "string"
+			},
+			{
+				"name": "REGISTRATION_DATE",
+				"type": "string"
+			},
+			{
+				"name": "CAUSAL_PART_NOW_ID",
+				"type": "string"
+			},
+			{
+				"name": "CAUSAL_PART_NO_PREFIX",
+				"type": "string"
+			},
+			{
+				"name": "CLAIM_JOB_STATE",
+				"type": "string"
+			},
+			{
+				"name": "DEFECT_CODE",
+				"type": "string"
+			},
+			{
+				"name": "JOB_NO",
+				"type": "string"
+			},
+			{
+				"name": "FUNCTION_GROUP",
+				"type": "string"
+			},
+			{
+				"name": "SERIAL_NO_CAUSAL",
+				"type": "string"
+			},
+			{
+				"name": "SUPPLIER_NO",
+				"type": "string"
+			},
+			{
+				"name": "TYPE_OF_CLAIM",
+				"type": "string"
+			},
+			{
+				"name": "REF_JOB_NO",
+				"type": "string"
+			},
+			{
+				"name": "TYPE_OF_CONCERN",
+				"type": "string"
+			},
+			{
+				"name": "COVERAGE_ID",
+				"type": "string"
+			},
+			{
+				"name": "UNPLANNED_STOP",
+				"type": "string"
+			},
+			{
+				"name": "CLAIM_REPAIR_HEADER_KEY",
+				"type": "string"
+			},
+			{
+				"name": "DEFECT_CODE_KEY",
+				"type": "string"
+			},
+			{
+				"name": "CLAIM_JOB_STATUS",
+				"type": "string"
+			},
+			{
+				"name": "CLAIM_JOB_STATUS_CODE",
+				"type": "integer"
+			},
+			{
+				"name": "CHASSIS_SERIES",
+				"type": "string"
+			},
+			{
+				"name": "CHASSIS_NO",
+				"type": "string"
+			},
+			{
+				"name": "REGISTRATION_NO",
+				"type": "string"
+			},
+			{
+				"name": "VIN",
+				"type": "string"
+			},
+			{
+				"name": "BRAND",
+				"type": "integer"
+			},
+			{
+				"name": "MARKETING_TYPE",
+				"type": "string"
+			},
+			{
+				"name": "AGE_VEHICLE",
+				"type": "string"
+			},
+			{
+				"name": "VEHICLE_MILAGE_KM",
+				"type": "integer"
+			},
+			{
+				"name": "REPAIRING_DEALER",
+				"type": "string"
+			},
+			{
+				"name": "REPAIR_ORDER_NO",
+				"type": "string"
+			},
+			{
+				"name": "REF_NO",
+				"type": "integer"
+			},
+			{
+				"name": "REPAIR_DATE",
+				"type": "string"
+			},
+			{
+				"name": "DELIVERING_IMPORTER",
+				"type": "integer"
+			},
+			{
+				"name": "DELIVERING_DEALER",
+				"type": "string"
+			},
+			{
+				"name": "CUSTOMER_NO",
+				"type": "string"
+			},
+			{
+				"name": "CURRENCY",
+				"type": "string"
+			},
+			{
+				"name": "REPAIR_REGISTRATION_DATE",
+				"type": "string"
+			},
+			{
+				"name": "EXCHANGE_RATE",
+				"type": "double"
+			},
+			{
+				"name": "CUSTOMER_NAME",
+				"type": "string"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,378 @@
+{
+	"name": "EDW2ADL_STOV_VDA_DB2_VEHICLE_VARIANT_ACT",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Set ID array",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('id_array')",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Set ID",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "id",
+								"value": {
+									"value": "@item()",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set Query",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Set factor",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "query",
+								"value": {
+									"value": "SELECT *\nFROM PROD_EDW_STOV.PROD_EDW_WHERESCAPE.STOV_VDA_DB2_VEHICLE_VARIANT_ACT\nLIMIT 20000000 OFFSET @{variables('factor')}",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Copy Netezza to ADL",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "Set Query",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "OdbcSource",
+									"query": {
+										"value": "@variables('query')",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00"
+								},
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "EDW2ADL_Source",
+									"type": "DatasetReference",
+									"parameters": {
+										"tablename": {
+											"value": "@pipeline().parameters.tablename",
+											"type": "Expression"
+										},
+										"databasename": {
+											"value": "@pipeline().parameters.databasename",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "EDW2ADL_Sink_VDA_Parquet",
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@{pipeline().parameters.tablename}_@{variables('id')}",
+											"type": "Expression"
+										},
+										"dirname": {
+											"value": "@pipeline().parameters.tablename",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "Set factor",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Set ID",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "factor",
+								"value": {
+									"value": "@string(mul(int(variables('id')),20000000))",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Set ID array",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "id_array",
+					"value": [
+						"0",
+						"1",
+						"2",
+						"3",
+						"4",
+						"5",
+						"6",
+						"7",
+						"8",
+						"9",
+						"10",
+						"11",
+						"12",
+						"13",
+						"14",
+						"15",
+						"16",
+						"17",
+						"18",
+						"19",
+						"20",
+						"21",
+						"22",
+						"23",
+						"24",
+						"25",
+						"26",
+						"27",
+						"28",
+						"29",
+						"30",
+						"31",
+						"32",
+						"33",
+						"34",
+						"35",
+						"36",
+						"37",
+						"38",
+						"39",
+						"40",
+						"41",
+						"42",
+						"43",
+						"44",
+						"45",
+						"46",
+						"47",
+						"48",
+						"49",
+						"50",
+						"51",
+						"52",
+						"53",
+						"54",
+						"55",
+						"56",
+						"57",
+						"58",
+						"59",
+						"60",
+						"61",
+						"62",
+						"63",
+						"64",
+						"65",
+						"66",
+						"67",
+						"68",
+						"69",
+						"70",
+						"71",
+						"72",
+						"73",
+						"74",
+						"75",
+						"76",
+						"77",
+						"78",
+						"79",
+						"80",
+						"81",
+						"82",
+						"83",
+						"84",
+						"85",
+						"86",
+						"87",
+						"88",
+						"89",
+						"90",
+						"91",
+						"92",
+						"93",
+						"94",
+						"95",
+						"96",
+						"97",
+						"98",
+						"99",
+						"100",
+						"101",
+						"102",
+						"103",
+						"104",
+						"105",
+						"106",
+						"107",
+						"108",
+						"109",
+						"110",
+						"111",
+						"112",
+						"113",
+						"114",
+						"115",
+						"116",
+						"117",
+						"118",
+						"119",
+						"120",
+						"121",
+						"122",
+						"123",
+						"124",
+						"125",
+						"126",
+						"127",
+						"128",
+						"129",
+						"130",
+						"131",
+						"132",
+						"133",
+						"134",
+						"135",
+						"136",
+						"137",
+						"138",
+						"139",
+						"140",
+						"141",
+						"142",
+						"143",
+						"144",
+						"145",
+						"146",
+						"147",
+						"148",
+						"149",
+						"150",
+						"151",
+						"152",
+						"153",
+						"154",
+						"155",
+						"156",
+						"157",
+						"158",
+						"159",
+						"160"
+					]
+				}
+			}
+		],
+		"parameters": {
+			"fieldkey": {
+				"type": "string",
+				"defaultValue": "toto"
+			},
+			"nbofbuckets": {
+				"type": "string",
+				"defaultValue": "toto"
+			},
+			"tablename": {
+				"type": "string",
+				"defaultValue": "STOV_VDA_DB2_VEHICLE_VARIANT_ACT"
+			},
+			"databasename": {
+				"type": "string",
+				"defaultValue": "PROD_EDW_STOV.PROD_EDW_WHERESCAPE."
+			}
+		},
+		"variables": {
+			"minid": {
+				"type": "String"
+			},
+			"maxid": {
+				"type": "String"
+			},
+			"id": {
+				"type": "String"
+			},
+			"query": {
+				"type": "String"
+			},
+			"id_array": {
+				"type": "Array"
+			},
+			"factor": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "EDW2ADL/Old"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-15T15:42:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

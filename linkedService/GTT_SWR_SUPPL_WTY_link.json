@@ -1,0 +1,13 @@
+{
+	"name": "GTT_SWR_SUPPL_WTY_link",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://volvogroup.sharepoint.com/sites/proj-qraftng/_api/web/GetFileByServerRelativeUrl('/sites/proj-qraftng/Shared Documents/Manual data/GTT_SWR_SUPPL_WTY.xlsx')/$value",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}

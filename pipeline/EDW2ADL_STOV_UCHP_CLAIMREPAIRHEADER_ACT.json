@@ -1,0 +1,238 @@
+{
+	"name": "EDW2ADL_STOV_UCHP_CLAIMREPAIRHEADER_ACT",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy Netezza STOV_UCHP to ADL_copy1_copy1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OdbcSource",
+						"query": "SELECT *\n  FROM PROD_EDW_STOV.PROD_EDW_WHERESCAPE.STOV_UCHP_CLAIMREPAIRHEADER_ACT\n\nwhere HUB_CLAIMREPAIRHEADER_SID < 882412471",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "EDWPROD_STOV_UCHP",
+						"type": "DatasetReference",
+						"parameters": {
+							"tablename": "toto"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Netezza_Stov_UCHP_parquet_copy",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": "STOV_UCHP_CLAIMREPAIRHEADER_ACT_1"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy Netezza STOV_UCHP to ADL_copy1_copy1_copy1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OdbcSource",
+						"query": "SELECT *\n  FROM PROD_EDW_STOV.PROD_EDW_WHERESCAPE.STOV_UCHP_CLAIMREPAIRHEADER_ACT\n\nwhere HUB_CLAIMREPAIRHEADER_SID >= 882412471 AND HUB_CLAIMREPAIRHEADER_SID < 893722166",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "EDWPROD_STOV_UCHP",
+						"type": "DatasetReference",
+						"parameters": {
+							"tablename": "toto"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Netezza_Stov_UCHP_parquet_copy",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": "STOV_UCHP_CLAIMREPAIRHEADER_ACT_2"
+						}
+					}
+				]
+			},
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [
+					{
+						"activity": "Copy Netezza STOV_UCHP to ADL_copy1_copy1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 10
+				}
+			},
+			{
+				"name": "Wait1_copy1",
+				"type": "Wait",
+				"dependsOn": [
+					{
+						"activity": "Copy Netezza STOV_UCHP to ADL_copy1_copy1_copy1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 10
+				}
+			},
+			{
+				"name": "Copy Netezza STOV_UCHP to ADL_copy1_copy1_copy1_copy1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Wait1_copy1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OdbcSource",
+						"query": "SELECT *\n  FROM PROD_EDW_STOV.PROD_EDW_WHERESCAPE.STOV_UCHP_CLAIMREPAIRHEADER_ACT\n\nwhere HUB_CLAIMREPAIRHEADER_SID >= 893722166",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "EDWPROD_STOV_UCHP",
+						"type": "DatasetReference",
+						"parameters": {
+							"tablename": "toto"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Netezza_Stov_UCHP_parquet_copy",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": "STOV_UCHP_CLAIMREPAIRHEADER_ACT_3"
+						}
+					}
+				]
+			}
+		],
+		"variables": {
+			"tablename": {
+				"type": "String"
+			},
+			"files": {
+				"type": "Array"
+			},
+			"listoffiles": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "EDW2ADL/Old"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-15T15:42:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

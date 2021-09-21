@@ -1,0 +1,236 @@
+{
+	"name": "EDW2ADL_STOV_UCHP_foreach_CLAIMLABOUR_ACT",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get Table Name",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tablename",
+					"value": "STOV_UCHP_CLAIMLABOUR_ACT"
+				}
+			},
+			{
+				"name": "Get Max ID Array",
+				"description": "",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "maxidarray",
+					"value": [
+						"883773882",
+						"893647751",
+						"904235675",
+						"915367011",
+						"959403712",
+						"1848800598",
+						"99999999999"
+					]
+				}
+			},
+			{
+				"name": "Get ID Array",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "idarray",
+					"value": [
+						"0",
+						"1",
+						"2",
+						"3",
+						"4",
+						"5",
+						"6"
+					]
+				}
+			},
+			{
+				"name": "Get Filtering Key",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "fieldkey",
+					"value": "HUB_CLAIMLABOUR_SID"
+				}
+			},
+			{
+				"name": "Get Min ID Array",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "minidarray",
+					"value": [
+						"0",
+						"883773882",
+						"893647751",
+						"904235675",
+						"915367011",
+						"959403712",
+						"1848800598"
+					]
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Get Table Name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Get Filtering Key",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Get ID Array",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Get Min ID Array",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Get Max ID Array",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('idarray')",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Set Query1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "query",
+								"value": {
+									"value": "SELECT * \nFROM PROD_EDW_STOV.PROD_EDW_WHERESCAPE.@{variables('tablename')}\nwhere @{variables('fieldkey')} >= @{variables('minidarray')[int(item())]}\nand @{variables('fieldkey')} < @{variables('maxidarray')[int(item())]}\n\n",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Copy Netezza STOV_UCHP to ADL_copy1_copy1",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "Set Query1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "OdbcSource",
+									"query": {
+										"value": "@variables('query')",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00"
+								},
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "EDWPROD_STOV_UCHP",
+									"type": "DatasetReference",
+									"parameters": {
+										"tablename": "toto"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "Netezza_Stov_UCHP_parquet_copy",
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@{variables('tablename')}_@{int(item())}",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"tablename": {
+				"type": "String"
+			},
+			"fieldkey": {
+				"type": "String"
+			},
+			"query": {
+				"type": "String"
+			},
+			"idarray": {
+				"type": "Array"
+			},
+			"minidarray": {
+				"type": "Array"
+			},
+			"maxidarray": {
+				"type": "Array"
+			}
+		},
+		"folder": {
+			"name": "EDW2ADL/Old"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-15T15:42:38Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

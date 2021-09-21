@@ -1,0 +1,1544 @@
+{
+	"name": "copy_from_sharepoint",
+	"properties": {
+		"activities": [
+			{
+				"name": "GetTokenSharepoint",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "https://accounts.accesscontrol.windows.net/f25493ae-1c98-41d7-8a33-0be75f5fe603/tokens/OAuth/2",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					"body": "grant_type=client_credentials&client_id=ad4c20d1-aa80-4835-ab36-d6848346cdab@f25493ae-1c98-41d7-8a33-0be75f5fe603&client_secret=ZKrphnrm4_J~55~Zk~4wTuYYBT67qpi-1p&resource=00000003-0000-0ff1-ce00-000000000000/volvogroup.sharepoint.com@f25493ae-1c98-41d7-8a33-0be75f5fe603"
+				}
+			},
+			{
+				"name": "Copy GTT_SWR_PARTCORRECT_xlsx",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "GetTokenSharepoint",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET",
+							"additionalHeaders": {
+								"value": "@{concat('Authorization: Bearer ', activity('GetTokenSharepoint').output.access_token)}",
+								"type": "Expression"
+							},
+							"requestTimeout": ""
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Part_Number",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Part_Number",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Part_Name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Part_Name",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Multiple_Entries",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Multiple_Entries",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Corrected_by",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Corrected_by",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Correction_Date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Correction_Date",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Motivation",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Motivation",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Correct_Supplier_Number",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Correct_Supplier_Number",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Correct_Supplier_Name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Correct_Supplier_Name",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Apply_To_APAC",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Apply_To_APAC",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Apply_To_RT",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Apply_To_RT",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Apply_to_NAM",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Apply_to_NAM",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Apply_to_EMEA",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Apply_to_EMEA",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Apply_to_LAM",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Apply_to_LAM",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Corrected_price",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Corrected_price",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Currency",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Currency",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Component_Group",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Component_Group",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "GTT_SWR_PARTCORRECT_xlsx",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "output_csv_TAB_LF_UTF8",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": "GTT_SWR_PARTCORRECT.csv"
+						}
+					}
+				]
+			},
+			{
+				"name": "Parma_LoadSharepointLists",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Copy ParmaList",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/alexandre.arroyo@volvo.com/5. User Story 3/US3 - Parma Load Sharepoint list"
+				},
+				"linkedServiceName": {
+					"referenceName": "QAQCS_Databricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Copy CreditCodeList",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SharePointOnlineListSource",
+						"httpRequestTimeout": "00:05:00"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ContentTypeID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ContentTypeID",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Title",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Title",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ComplianceAssetId",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ComplianceAssetId",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DEB_CD",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "DEB_CD",
+									"type": "Double",
+									"physicalType": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "CLMCATValue",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLMCATValue",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DEBITCODETYPEValue",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DEBITCODETYPEValue",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DEBSORT",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "DEBSORT",
+									"type": "Double",
+									"physicalType": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "REPSORT",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "REPSORT",
+									"type": "Double",
+									"physicalType": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Id",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ContentType",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ContentType",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Modified",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Modified",
+									"type": "DateTime",
+									"physicalType": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Created",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Created",
+									"type": "DateTime",
+									"physicalType": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedById",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "CreatedById",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ModifiedById",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "ModifiedById",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Owshiddenversion",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Owshiddenversion",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Version",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Version",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Path",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Path",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SharePointOnlineListResource_QAQCS",
+						"type": "DatasetReference",
+						"parameters": {
+							"ListName": "DEBIT_CODE"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "output_csv_TAB_LF_UTF8",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": "Debit_code.csv"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy WarrantySupplierList",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SharePointOnlineListSource",
+						"httpRequestTimeout": "00:05:00"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ContentTypeID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ContentTypeID",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Title",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Title",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ComplianceAssetId",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ComplianceAssetId",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "WarrantyValue",
+									"type": "String"
+								},
+								"sink": {
+									"name": "WarrantyValue",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DescValue",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DescValue",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Id",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ContentType",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ContentType",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Modified",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Modified",
+									"type": "DateTime",
+									"physicalType": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Created",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Created",
+									"type": "DateTime",
+									"physicalType": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedById",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "CreatedById",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ModifiedById",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "ModifiedById",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Owshiddenversion",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Owshiddenversion",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Version",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Version",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Path",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Path",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SharePointOnlineListResource_QAQCS",
+						"type": "DatasetReference",
+						"parameters": {
+							"ListName": "WARRANTY_SUPPLIER"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "output_csv_TAB_LF_UTF8",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": "Warranty_supplier.csv"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy ParmaList",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SharePointOnlineListSource",
+						"httpRequestTimeout": "00:05:00"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ContentTypeID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ContentTypeID",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Title",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Title",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ComplianceAssetId",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ComplianceAssetId",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Parma_Name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Parma_Name",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Parent_Parma",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Parent_Parma",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Parent_Supplier_Name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Parent_Supplier_Name",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Status_ACTIVE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Status_ACTIVE",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Grand_Parent",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Grand_Parent",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SWR_Site_Responsible",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SWR_Site_Responsible",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Major_Component",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Major_Component",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Apply_to_APACValue",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Apply_to_APACValue",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Apply_to_RTValue",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Apply_to_RTValue",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Apply_to_NAMValue",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Apply_to_NAMValue",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Apply_to_EMEAValue",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Apply_to_EMEAValue",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Apply_to_LAMValue",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Apply_to_LAMValue",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Responsible",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Responsible",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Part_Age_Limit",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Part_Age_Limit",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Part_Mileage_Limit",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Part_Mileage_Limit",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Part_Mileage_Limit_Units",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Part_Mileage_Limit_Units",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Spare_Part_Age_Limit",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Spare_Part_Age_Limit",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Consequential_Damage",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Consequential_Damage",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "WC_Location",
+									"type": "String"
+								},
+								"sink": {
+									"name": "WC_Location",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Towing",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Towing",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Comment",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Comment",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SWR_Type",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SWR_Type",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Handling",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Handling",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Volvo_Group_Product",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Volvo_Group_Product",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Id",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ContentType",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ContentType",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Modified",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Modified",
+									"type": "DateTime",
+									"physicalType": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Created",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Created",
+									"type": "DateTime",
+									"physicalType": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedById",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "CreatedById",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ModifiedById",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "ModifiedById",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Owshiddenversion",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Owshiddenversion",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Version",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Version",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Path",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Path",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SharePointOnlineListResource_QAQCS",
+						"type": "DatasetReference",
+						"parameters": {
+							"ListName": "GTT_SWR_PARENT_PARMA"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "output_csv_TAB_LF_UTF8",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": "Parma_list.csv"
+						}
+					}
+				]
+			},
+			{
+				"name": "DebitCode_LoadSharepointList",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Copy CreditCodeList",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/alexandre.arroyo@volvo.com/5. User Story 3/US3 - DebitCode load Sharepoint list"
+				},
+				"linkedServiceName": {
+					"referenceName": "QAQCS_Databricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Warranty_LoadSharepointList",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Copy WarrantySupplierList",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/alexandre.arroyo@volvo.com/5. User Story 3/US3 - SupplierWarranty load Sharepoint list"
+				},
+				"linkedServiceName": {
+					"referenceName": "QAQCS_Databricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Copy DataExtract",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SharePointOnlineListSource",
+						"httpRequestTimeout": "00:05:00"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ContentTypeID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ContentTypeID",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ContentType",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ContentType",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Title",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Title",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Modified",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Modified",
+									"type": "DateTime",
+									"physicalType": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Created",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Created",
+									"type": "DateTime",
+									"physicalType": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedById",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "CreatedById",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ModifiedById",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "ModifiedById",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Owshiddenversion",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Owshiddenversion",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Version",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Version",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Path",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Path",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ComplianceAssetId",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ComplianceAssetId",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Start_date",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Start_date",
+									"type": "DateTime",
+									"physicalType": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "End_Date",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "End_Date",
+									"type": "DateTime",
+									"physicalType": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "FrequencyValue",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FrequencyValue",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SharePointOnlineListResource_QAQCS",
+						"type": "DatasetReference",
+						"parameters": {
+							"ListName": "Self_Service_v002"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "output_csv_TAB_LF_UTF8",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": "Self_Service.csv"
+						}
+					}
+				]
+			},
+			{
+				"name": "DataExtract",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Copy DataExtract",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/alexandre.arroyo@volvo.com/6. User Story 5/US5 - Self_Service"
+				},
+				"linkedServiceName": {
+					"referenceName": "QAQCS_Databricks",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-09-15T15:42:38Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

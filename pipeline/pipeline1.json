@@ -1,0 +1,1052 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureDatabricksDeltaLakeSource",
+						"exportSettings": {
+							"type": "AzureDatabricksDeltaLakeExportCommand"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"blockSizeInMB": 100
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "VEHICLE_ID",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "VEHICLE_ID",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "VEHICLE_KEY",
+									"type": "string"
+								},
+								"sink": {
+									"name": "VEHICLE_KEY",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "FIRST_ASS_DATETIME",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "FIRST_ASS_DATETIME",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "FACTORY_ORDER_NBR",
+									"type": "string"
+								},
+								"sink": {
+									"name": "FACTORY_ORDER_NBR",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "ASSEMBLY_ORDER_NBR",
+									"type": "string"
+								},
+								"sink": {
+									"name": "ASSEMBLY_ORDER_NBR",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "ORDER_REGISTRATION_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "ORDER_REGISTRATION_DATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CHASSIS_SERIE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "CHASSIS_SERIE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "CHASSIS_NBR",
+									"type": "string"
+								},
+								"sink": {
+									"name": "CHASSIS_NBR",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "T_CHASSIS",
+									"type": "string"
+								},
+								"sink": {
+									"name": "T_CHASSIS",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "CHASSIS_TYPE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "CHASSIS_TYPE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "VIN_NBR",
+									"type": "string"
+								},
+								"sink": {
+									"name": "VIN_NBR",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "FACTORY_CODE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "FACTORY_CODE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "BUILD_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "BUILD_DATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "WARRANTY_CODE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "WARRANTY_CODE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "SPEC_FLAG",
+									"type": "string"
+								},
+								"sink": {
+									"name": "SPEC_FLAG",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "FOLLOW_UP_CODE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "FOLLOW_UP_CODE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "FLOW_ID",
+									"type": "string"
+								},
+								"sink": {
+									"name": "FLOW_ID",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "ASSEMBLY_WEEK",
+									"type": "string"
+								},
+								"sink": {
+									"name": "ASSEMBLY_WEEK",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "ASSEMBLY_WEEK_DAY",
+									"type": "string"
+								},
+								"sink": {
+									"name": "ASSEMBLY_WEEK_DAY",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "ASSEMBLY_TIME",
+									"type": "string"
+								},
+								"sink": {
+									"name": "ASSEMBLY_TIME",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "BUILD_YEAR",
+									"type": "string"
+								},
+								"sink": {
+									"name": "BUILD_YEAR",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "VEH_PROD_TYPE_SYMBOL",
+									"type": "string"
+								},
+								"sink": {
+									"name": "VEH_PROD_TYPE_SYMBOL",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "VEH_PROD_TYPE_NAME",
+									"type": "string"
+								},
+								"sink": {
+									"name": "VEH_PROD_TYPE_NAME",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "VEH_PROD_CMPY_NBR",
+									"type": "string"
+								},
+								"sink": {
+									"name": "VEH_PROD_CMPY_NBR",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "VEH_PROD_CMPY_CODE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "VEH_PROD_CMPY_CODE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "VEH_PROD_CMPY_SYMBOL",
+									"type": "string"
+								},
+								"sink": {
+									"name": "VEH_PROD_CMPY_SYMBOL",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "MARKETING_TYPE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "MARKETING_TYPE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "MARKETING_TYPE_DESC",
+									"type": "string"
+								},
+								"sink": {
+									"name": "MARKETING_TYPE_DESC",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "VEHICLE_TYPE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "VEHICLE_TYPE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "VEHICLE_TYPE_DESC",
+									"type": "string"
+								},
+								"sink": {
+									"name": "VEHICLE_TYPE_DESC",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCT_CLASS_NBR",
+									"type": "string"
+								},
+								"sink": {
+									"name": "PRODUCT_CLASS_NBR",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCT_CLASS_NAME",
+									"type": "string"
+								},
+								"sink": {
+									"name": "PRODUCT_CLASS_NAME",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "GEARBOX",
+									"type": "string"
+								},
+								"sink": {
+									"name": "GEARBOX",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "REAR_AXLE_1",
+									"type": "string"
+								},
+								"sink": {
+									"name": "REAR_AXLE_1",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "REAR_AXLE_2",
+									"type": "string"
+								},
+								"sink": {
+									"name": "REAR_AXLE_2",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "AXLE_COMBINATION",
+									"type": "string"
+								},
+								"sink": {
+									"name": "AXLE_COMBINATION",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "ENGINE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "ENGINE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "GEARBOX_SERIAL",
+									"type": "string"
+								},
+								"sink": {
+									"name": "GEARBOX_SERIAL",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "ENGINE_SERIAL",
+									"type": "string"
+								},
+								"sink": {
+									"name": "ENGINE_SERIAL",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "AXLE_COMBINATION_SERIAL",
+									"type": "string"
+								},
+								"sink": {
+									"name": "AXLE_COMBINATION_SERIAL",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "REAR_AXLE_2_SERIAL",
+									"type": "string"
+								},
+								"sink": {
+									"name": "REAR_AXLE_2_SERIAL",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "REAR_AXLE_1_SERIAL",
+									"type": "string"
+								},
+								"sink": {
+									"name": "REAR_AXLE_1_SERIAL",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "DELIVERY_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DELIVERY_DATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "REGISTRATION",
+									"type": "string"
+								},
+								"sink": {
+									"name": "REGISTRATION",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "VEHICLE_OPERATION",
+									"type": "string"
+								},
+								"sink": {
+									"name": "VEHICLE_OPERATION",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "CHASSIS_WEIGHT",
+									"type": "string"
+								},
+								"sink": {
+									"name": "CHASSIS_WEIGHT",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "INACTIVE_CODE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "INACTIVE_CODE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "INACTIVE_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "INACTIVE_DATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "COUNTRY_OF_OPERATION",
+									"type": "string"
+								},
+								"sink": {
+									"name": "COUNTRY_OF_OPERATION",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "USING_CUSTOMER_ID",
+									"type": "string"
+								},
+								"sink": {
+									"name": "USING_CUSTOMER_ID",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "USING_CUSTOMER_REF",
+									"type": "string"
+								},
+								"sink": {
+									"name": "USING_CUSTOMER_REF",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "BUYING_CUSTOMER_ID",
+									"type": "string"
+								},
+								"sink": {
+									"name": "BUYING_CUSTOMER_ID",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "DATE_OF_INVOICE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DATE_OF_INVOICE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DATE_OF_SERVICE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DATE_OF_SERVICE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "MAIN_OPERATION_AT_SERVICE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "MAIN_OPERATION_AT_SERVICE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "DATE_OF_LATEST_KNOWN_MILEAGE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DATE_OF_LATEST_KNOWN_MILEAGE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "REPAIRING_DEALER_IMPORTER_NK",
+									"type": "string"
+								},
+								"sink": {
+									"name": "REPAIRING_DEALER_IMPORTER_NK",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "REPAIRING_DEALER_NK",
+									"type": "string"
+								},
+								"sink": {
+									"name": "REPAIRING_DEALER_NK",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "FIRST_ASS_DATETIME_ORIG",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "FIRST_ASS_DATETIME_ORIG",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DELIVERY_DATE_ORIG",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DELIVERY_DATE_ORIG",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "REPAIRING_DEALER_IMPORTER_SRC",
+									"type": "string"
+								},
+								"sink": {
+									"name": "REPAIRING_DEALER_IMPORTER_SRC",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "BODY_NAME",
+									"type": "string"
+								},
+								"sink": {
+									"name": "BODY_NAME",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "MODEL_NAME",
+									"type": "string"
+								},
+								"sink": {
+									"name": "MODEL_NAME",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCT_CLASS_TYPE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "PRODUCT_CLASS_TYPE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "DELIVERING_DEALER",
+									"type": "string"
+								},
+								"sink": {
+									"name": "DELIVERING_DEALER",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "DELIVERING_IMPORTER",
+									"type": "string"
+								},
+								"sink": {
+									"name": "DELIVERING_IMPORTER",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "KD_LOCAL1",
+									"type": "string"
+								},
+								"sink": {
+									"name": "KD_LOCAL1",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "KD_LOCAL2",
+									"type": "string"
+								},
+								"sink": {
+									"name": "KD_LOCAL2",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "KD_LOCAL3",
+									"type": "string"
+								},
+								"sink": {
+									"name": "KD_LOCAL3",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "DELETE_FLAG",
+									"type": "string"
+								},
+								"sink": {
+									"name": "DELETE_FLAG",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "BRAND_TYPE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "BRAND_TYPE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "KDSERVICE",
+									"type": "string"
+								},
+								"sink": {
+									"name": "KDSERVICE",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "BEIMP_EXPORTED_TO",
+									"type": "string"
+								},
+								"sink": {
+									"name": "BEIMP_EXPORTED_TO",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "IDMAINPLANT",
+									"type": "string"
+								},
+								"sink": {
+									"name": "IDMAINPLANT",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "IDBODYPLANT",
+									"type": "string"
+								},
+								"sink": {
+									"name": "IDBODYPLANT",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "IDFINALPLANT",
+									"type": "string"
+								},
+								"sink": {
+									"name": "IDFINALPLANT",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "VHO_QUESTION1",
+									"type": "string"
+								},
+								"sink": {
+									"name": "VHO_QUESTION1",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "VHO_QUESTION2",
+									"type": "string"
+								},
+								"sink": {
+									"name": "VHO_QUESTION2",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "VHO_QUESTION3",
+									"type": "string"
+								},
+								"sink": {
+									"name": "VHO_QUESTION3",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "GVWR_VTNA",
+									"type": "string"
+								},
+								"sink": {
+									"name": "GVWR_VTNA",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "RETAIL_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "RETAIL_DATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "SALID_VTNA",
+									"type": "string"
+								},
+								"sink": {
+									"name": "SALID_VTNA",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "SALPNAME_VTNA",
+									"type": "string"
+								},
+								"sink": {
+									"name": "SALPNAME_VTNA",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "PROGNAME_VTNA",
+									"type": "string"
+								},
+								"sink": {
+									"name": "PROGNAME_VTNA",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "SALASCONU_VTNA",
+									"type": "string"
+								},
+								"sink": {
+									"name": "SALASCONU_VTNA",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "BATCH_ID",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "BATCH_ID",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "FINAL_ASSEMBLY_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "FINAL_ASSEMBLY_DATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DELIVERING_DEALER_SID",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "DELIVERING_DEALER_SID",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "DELIVERING_IMPORTER_SID",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "DELIVERING_IMPORTER_SID",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "REPAIRING_DEALER_SID",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "REPAIRING_DEALER_SID",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "REPAIRING_DEALER_IMPORTER_SID",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "REPAIRING_DEALER_IMPORTER_SID",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "USING_CUSTOMER_ID_CD",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "USING_CUSTOMER_ID_CD",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "BUYING_CUSTOMER_ID_CD",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "BUYING_CUSTOMER_ID_CD",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "UNIT_NUM_VTNA",
+									"type": "string"
+								},
+								"sink": {
+									"name": "UNIT_NUM_VTNA",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "BRAND_ID",
+									"type": "string"
+								},
+								"sink": {
+									"name": "BRAND_ID",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "BRAND_SID",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "BRAND_SID",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "NON_VOLVO_REFERENCE_ID",
+									"type": "string"
+								},
+								"sink": {
+									"name": "NON_VOLVO_REFERENCE_ID",
+									"type": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "MILEAGE_AT_SERVICE",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "MILEAGE_AT_SERVICE",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "LATEST_KNOWN_MILEAGE",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "LATEST_KNOWN_MILEAGE",
+									"type": "Int64"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "in_gtt_vda_prod",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "out_qaqcs_vda_prod_parquet",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "copy_adl_prod_data"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-15T15:42:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

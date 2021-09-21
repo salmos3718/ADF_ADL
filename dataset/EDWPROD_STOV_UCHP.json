@@ -1,0 +1,27 @@
+{
+	"name": "EDWPROD_STOV_UCHP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "PROD_NETEZZA_PROD_EDW_STOV",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"tablename": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Netezza"
+		},
+		"annotations": [],
+		"type": "OdbcTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": {
+				"value": "\"PROD_EDW_STOV.PROD_EDW_WHERESCAPE\".@{dataset().tablename}",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "qraft_buildoptionskolaAM",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "qaqcs_sql01_db01",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "qraft_buildoptionskolaAM"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

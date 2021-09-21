@@ -1,12 +1,11 @@
 {
-	"name": "AzureDatabricksDeltaLake1",
+	"name": "Large_Databricks_cluster",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
-		"type": "AzureDatabricksDeltaLake",
+		"type": "AzureDatabricks",
 		"typeProperties": {
 			"domain": "https://adb-7235625213198419.19.azuredatabricks.net",
-			"clusterId": "0915-153329-beaus422",
 			"accessToken": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
@@ -14,7 +13,8 @@
 					"type": "LinkedServiceReference"
 				},
 				"secretName": "db-token"
-			}
+			},
+			"existingClusterId": "0325-112900-roof280"
 		}
 	}
 }

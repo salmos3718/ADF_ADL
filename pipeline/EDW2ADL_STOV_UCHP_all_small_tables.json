@@ -1,0 +1,133 @@
+{
+	"name": "EDW2ADL_STOV_UCHP_all_small_tables",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "get tables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('files')",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Copy Netezza STOV_UCHP to ADL_copy1",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "Wait1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "OdbcSource",
+									"queryTimeout": "02:00:00"
+								},
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "EDWPROD_STOV_UCHP",
+									"type": "DatasetReference",
+									"parameters": {
+										"tablename": {
+											"value": "@item()",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "Netezza_Stov_UCHP_parquet_copy",
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@item()",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "Wait1",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 10
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "get tables",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tablename",
+					"value": "STOV_UCHP_CLAIMJOBSTATE_ACT,STOV_UCHP_ROOTCAUSE_ACT,STOV_UCHP_CASESOURCE_ACT,STOV_UCHP_FUNCTIONAREA_ACT,STOV_UCHP_TMASITE_ACT,STOV_UCHP_APPROVALCODE_ACT,STOV_UCHP_MATERIALINSTR_ACT,STOV_UCHP_DEBITCODE_ACT,STOV_UCHP_RECEIVINGPROBLEM_ACT,STOV_UCHP_FUNCTIONGROUPRANGE_ACT,STOV_UCHP_REJECTCODETMA_ACT,STOV_UCHP_DEFECTCODE_ACT,STOV_UCHP_REQUESTERTMA_ACT,STOV_UCHP_RETURNCODE_ACT,STOV_UCHP_REJECTCODE_ACT,STOV_UCHP_COVERAGE_ACT,STOV_UCHP_FOLLOWUPCODE_ACT,STOV_UCHP_COVERAGETEXT_ACT,STOV_UCHP_STORAGELOCATION_ACT,STOV_UCHP_OTHERSTORAGECLAIM_ACT,STOV_UCHP_OTHERSTORAGELOC_ACT,STOV_UCHP_MATERIALREQ_ACT,STOV_UCHP_SHIPPINGOCCHEAD_ACT,STOV_UCHP_DELIVERYCLAIMJOB_ACT,STOV_UCHP_CLAIMCOSTTMA_ACT,STOV_UCHP_SHIPPINGOCCCLAIM_ACT,STOV_UCHP_CLAIMJOBRECPROBLEM_ACT,STOV_UCHP_STORAGECLAIMJOBTMA_ACT,STOV_UCHP_CREDITOCC_ACT,STOV_UCHP_INSPECTORREPORTVEH_ACT,STOV_UCHP_INSPECTORREPORT_ACT,STOV_UCHP_TMADECISIONLOG_ACT,STOV_UCHP_CLAIMJOBTMA_ACT,STOV_UCHP_CLAIMRETURN_ACT,STOV_UCHP_CREDITOCCDEALER_ACT,STOV_UCHP_CLAIMLABOURTMA_ACT,STOV_UCHP_CLAIMMATERIALTMA_ACT,STOV_UCHP_TMASTATELOG_ACT,STOV_UCHP_CLAIMCOSTDEBIT_ACT,STOV_UCHP_CLAIMCOST_ACT,STOV_UCHP_CLAIMJOBSUPPLEMENT_ACT,\n"
+				}
+			}
+		],
+		"variables": {
+			"tablename": {
+				"type": "String"
+			},
+			"files": {
+				"type": "Array"
+			},
+			"listoffiles": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "EDW2ADL/Old"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-15T15:42:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

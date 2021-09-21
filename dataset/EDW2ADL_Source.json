@@ -1,0 +1,32 @@
+{
+	"name": "EDW2ADL_Source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "PROD_NETEZZA_PROD_EDW_STOV",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"tablename": {
+				"type": "string",
+				"defaultValue": "STOV_UCHP_CLAIMCOSTDEBIT_ACT"
+			},
+			"databasename": {
+				"type": "string",
+				"defaultValue": "PROD_EDW_STOV.PROD_EDW_WHERESCAPE."
+			}
+		},
+		"folder": {
+			"name": "EDW2ADL"
+		},
+		"annotations": [],
+		"type": "OdbcTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": {
+				"value": "@{dataset().databasename}@{dataset().tablename}",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

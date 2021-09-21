@@ -1,0 +1,45 @@
+{
+	"name": "EDW2ADL_UCHP_TablesToLoad_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "vgadlqaqcssa01",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "EDW2ADL"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "EDW2ADL_UCHP_TablesToLoad.csv",
+				"folderPath": "netezza/UCHP",
+				"fileSystem": "qaqcs"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Database",
+				"type": "String"
+			},
+			{
+				"name": "Table",
+				"type": "String"
+			},
+			{
+				"name": "Partition_FieldKey",
+				"type": "String"
+			},
+			{
+				"name": "Partition_Nb_of_rows",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

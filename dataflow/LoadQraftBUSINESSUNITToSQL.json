@@ -1,0 +1,28 @@
+{
+	"name": "LoadQraftBUSINESSUNITToSQL",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "vgadlqaqcssa01",
+						"type": "LinkedServiceReference"
+					},
+					"name": "BUSINESSUNIT"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "qraft_claims",
+						"type": "DatasetReference"
+					},
+					"name": "SqlBUSINESSUNIT"
+				}
+			],
+			"transformations": [],
+			"script": "source(output(\n\t\tBUSINESS_UNIT as string,\n\t\tDES_AREA as string,\n\t\tVMT as string,\n\t\tBUSINESS_UNIT_ID as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'qaqcs',\n\tfolderPath: 'US2-Test/BUSINESS_UNIT',\n\tdateFormats: ['yyyy-MM-dd'],\n\ttimestampFormats: ['yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'','yyyy-MM-dd\\'T\\'HH:mm:ss'],\n\tpreferredIntegralType: 'short',\n\tpreferredFractionalType: 'float') ~> BUSINESSUNIT\nBUSINESSUNIT sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstagingSchemaName: 'temp',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> SqlBUSINESSUNIT"
+		}
+	}
+}

@@ -1,0 +1,417 @@
+{
+	"name": "in_gtt_vda_prod",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "GTT_Delta_Source",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "copy_adl_prod_data"
+		},
+		"annotations": [],
+		"type": "AzureDatabricksDeltaLakeDataset",
+		"typeProperties": {
+			"database": "ds_vehicle",
+			"table": "d_vehicle"
+		},
+		"schema": [
+			{
+				"name": "VEHICLE_ID",
+				"type": "long"
+			},
+			{
+				"name": "VEHICLE_KEY",
+				"type": "string"
+			},
+			{
+				"name": "FIRST_ASS_DATETIME",
+				"type": "timestamp"
+			},
+			{
+				"name": "FACTORY_ORDER_NBR",
+				"type": "string"
+			},
+			{
+				"name": "ASSEMBLY_ORDER_NBR",
+				"type": "string"
+			},
+			{
+				"name": "ORDER_REGISTRATION_DATE",
+				"type": "timestamp"
+			},
+			{
+				"name": "CHASSIS_SERIE",
+				"type": "string"
+			},
+			{
+				"name": "CHASSIS_NBR",
+				"type": "string"
+			},
+			{
+				"name": "T_CHASSIS",
+				"type": "string"
+			},
+			{
+				"name": "CHASSIS_TYPE",
+				"type": "string"
+			},
+			{
+				"name": "VIN_NBR",
+				"type": "string"
+			},
+			{
+				"name": "FACTORY_CODE",
+				"type": "string"
+			},
+			{
+				"name": "BUILD_DATE",
+				"type": "timestamp"
+			},
+			{
+				"name": "WARRANTY_CODE",
+				"type": "string"
+			},
+			{
+				"name": "SPEC_FLAG",
+				"type": "string"
+			},
+			{
+				"name": "FOLLOW_UP_CODE",
+				"type": "string"
+			},
+			{
+				"name": "FLOW_ID",
+				"type": "string"
+			},
+			{
+				"name": "ASSEMBLY_WEEK",
+				"type": "string"
+			},
+			{
+				"name": "ASSEMBLY_WEEK_DAY",
+				"type": "string"
+			},
+			{
+				"name": "ASSEMBLY_TIME",
+				"type": "string"
+			},
+			{
+				"name": "BUILD_YEAR",
+				"type": "string"
+			},
+			{
+				"name": "VEH_PROD_TYPE_SYMBOL",
+				"type": "string"
+			},
+			{
+				"name": "VEH_PROD_TYPE_NAME",
+				"type": "string"
+			},
+			{
+				"name": "VEH_PROD_CMPY_NBR",
+				"type": "string"
+			},
+			{
+				"name": "VEH_PROD_CMPY_CODE",
+				"type": "string"
+			},
+			{
+				"name": "VEH_PROD_CMPY_SYMBOL",
+				"type": "string"
+			},
+			{
+				"name": "MARKETING_TYPE",
+				"type": "string"
+			},
+			{
+				"name": "MARKETING_TYPE_DESC",
+				"type": "string"
+			},
+			{
+				"name": "VEHICLE_TYPE",
+				"type": "string"
+			},
+			{
+				"name": "VEHICLE_TYPE_DESC",
+				"type": "string"
+			},
+			{
+				"name": "PRODUCT_CLASS_NBR",
+				"type": "string"
+			},
+			{
+				"name": "PRODUCT_CLASS_NAME",
+				"type": "string"
+			},
+			{
+				"name": "GEARBOX",
+				"type": "string"
+			},
+			{
+				"name": "REAR_AXLE_1",
+				"type": "string"
+			},
+			{
+				"name": "REAR_AXLE_2",
+				"type": "string"
+			},
+			{
+				"name": "AXLE_COMBINATION",
+				"type": "string"
+			},
+			{
+				"name": "ENGINE",
+				"type": "string"
+			},
+			{
+				"name": "GEARBOX_SERIAL",
+				"type": "string"
+			},
+			{
+				"name": "ENGINE_SERIAL",
+				"type": "string"
+			},
+			{
+				"name": "AXLE_COMBINATION_SERIAL",
+				"type": "string"
+			},
+			{
+				"name": "REAR_AXLE_2_SERIAL",
+				"type": "string"
+			},
+			{
+				"name": "REAR_AXLE_1_SERIAL",
+				"type": "string"
+			},
+			{
+				"name": "DELIVERY_DATE",
+				"type": "timestamp"
+			},
+			{
+				"name": "REGISTRATION",
+				"type": "string"
+			},
+			{
+				"name": "VEHICLE_OPERATION",
+				"type": "string"
+			},
+			{
+				"name": "CHASSIS_WEIGHT",
+				"type": "string"
+			},
+			{
+				"name": "INACTIVE_CODE",
+				"type": "string"
+			},
+			{
+				"name": "INACTIVE_DATE",
+				"type": "timestamp"
+			},
+			{
+				"name": "COUNTRY_OF_OPERATION",
+				"type": "string"
+			},
+			{
+				"name": "USING_CUSTOMER_ID",
+				"type": "string"
+			},
+			{
+				"name": "USING_CUSTOMER_REF",
+				"type": "string"
+			},
+			{
+				"name": "BUYING_CUSTOMER_ID",
+				"type": "string"
+			},
+			{
+				"name": "DATE_OF_INVOICE",
+				"type": "timestamp"
+			},
+			{
+				"name": "DATE_OF_SERVICE",
+				"type": "timestamp"
+			},
+			{
+				"name": "MAIN_OPERATION_AT_SERVICE",
+				"type": "string"
+			},
+			{
+				"name": "DATE_OF_LATEST_KNOWN_MILEAGE",
+				"type": "timestamp"
+			},
+			{
+				"name": "REPAIRING_DEALER_IMPORTER_NK",
+				"type": "string"
+			},
+			{
+				"name": "REPAIRING_DEALER_NK",
+				"type": "string"
+			},
+			{
+				"name": "FIRST_ASS_DATETIME_ORIG",
+				"type": "timestamp"
+			},
+			{
+				"name": "DELIVERY_DATE_ORIG",
+				"type": "timestamp"
+			},
+			{
+				"name": "REPAIRING_DEALER_IMPORTER_SRC",
+				"type": "string"
+			},
+			{
+				"name": "BODY_NAME",
+				"type": "string"
+			},
+			{
+				"name": "MODEL_NAME",
+				"type": "string"
+			},
+			{
+				"name": "PRODUCT_CLASS_TYPE",
+				"type": "string"
+			},
+			{
+				"name": "DELIVERING_DEALER",
+				"type": "string"
+			},
+			{
+				"name": "DELIVERING_IMPORTER",
+				"type": "string"
+			},
+			{
+				"name": "KD_LOCAL1",
+				"type": "string"
+			},
+			{
+				"name": "KD_LOCAL2",
+				"type": "string"
+			},
+			{
+				"name": "KD_LOCAL3",
+				"type": "string"
+			},
+			{
+				"name": "DELETE_FLAG",
+				"type": "string"
+			},
+			{
+				"name": "BRAND_TYPE",
+				"type": "string"
+			},
+			{
+				"name": "KDSERVICE",
+				"type": "string"
+			},
+			{
+				"name": "BEIMP_EXPORTED_TO",
+				"type": "string"
+			},
+			{
+				"name": "IDMAINPLANT",
+				"type": "string"
+			},
+			{
+				"name": "IDBODYPLANT",
+				"type": "string"
+			},
+			{
+				"name": "IDFINALPLANT",
+				"type": "string"
+			},
+			{
+				"name": "VHO_QUESTION1",
+				"type": "string"
+			},
+			{
+				"name": "VHO_QUESTION2",
+				"type": "string"
+			},
+			{
+				"name": "VHO_QUESTION3",
+				"type": "string"
+			},
+			{
+				"name": "GVWR_VTNA",
+				"type": "string"
+			},
+			{
+				"name": "RETAIL_DATE",
+				"type": "timestamp"
+			},
+			{
+				"name": "SALID_VTNA",
+				"type": "string"
+			},
+			{
+				"name": "SALPNAME_VTNA",
+				"type": "string"
+			},
+			{
+				"name": "PROGNAME_VTNA",
+				"type": "string"
+			},
+			{
+				"name": "SALASCONU_VTNA",
+				"type": "string"
+			},
+			{
+				"name": "BATCH_ID",
+				"type": "long"
+			},
+			{
+				"name": "FINAL_ASSEMBLY_DATE",
+				"type": "timestamp"
+			},
+			{
+				"name": "DELIVERING_DEALER_SID",
+				"type": "long"
+			},
+			{
+				"name": "DELIVERING_IMPORTER_SID",
+				"type": "long"
+			},
+			{
+				"name": "REPAIRING_DEALER_SID",
+				"type": "long"
+			},
+			{
+				"name": "REPAIRING_DEALER_IMPORTER_SID",
+				"type": "long"
+			},
+			{
+				"name": "USING_CUSTOMER_ID_CD",
+				"type": "long"
+			},
+			{
+				"name": "BUYING_CUSTOMER_ID_CD",
+				"type": "long"
+			},
+			{
+				"name": "UNIT_NUM_VTNA",
+				"type": "string"
+			},
+			{
+				"name": "BRAND_ID",
+				"type": "string"
+			},
+			{
+				"name": "BRAND_SID",
+				"type": "long"
+			},
+			{
+				"name": "NON_VOLVO_REFERENCE_ID",
+				"type": "string"
+			},
+			{
+				"name": "MILEAGE_AT_SERVICE",
+				"type": "long"
+			},
+			{
+				"name": "LATEST_KNOWN_MILEAGE",
+				"type": "long"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

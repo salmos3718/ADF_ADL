@@ -1,0 +1,43 @@
+{
+	"name": "EDW2ADL_TablesToLoad_xls",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "vgadlqaqcssa01",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "EDW2ADL"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "tables",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "EDW2ADL_TablesToLoad.xlsx",
+				"folderPath": "netezza",
+				"fileSystem": "qaqcs"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Database",
+				"type": "String"
+			},
+			{
+				"name": "Table",
+				"type": "String"
+			},
+			{
+				"name": "Partition_FieldKey",
+				"type": "String"
+			},
+			{
+				"name": "Partition_Nb_of_rows",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

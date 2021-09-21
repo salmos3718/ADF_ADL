@@ -1,0 +1,176 @@
+{
+	"name": "EDW2ADL_TableList_Transfert",
+	"properties": {
+		"activities": [
+			{
+				"name": "ListOfTables",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						}
+					},
+					"dataset": {
+						"referenceName": "EDW2ADL_TablesToLoad_xls",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "ListOfTables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('ListOfTables').output.value\n",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Set Database Name",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "databasename",
+								"value": {
+									"value": "@{item().Database}",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set Table Name",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "tablename",
+								"value": {
+									"value": "@{item().Table}",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set Storage Parent Dir",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "storageparentdir",
+								"value": {
+									"value": "@{item().Partition_storageparentdir}",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Execute EDW2ADL_Table_Transfert",
+							"type": "ExecutePipeline",
+							"dependsOn": [
+								{
+									"activity": "Wait 30s for Netezza limit",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "EDW2ADL_Table_Transfert",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"table": {
+										"value": "@variables('tablename')",
+										"type": "Expression"
+									},
+									"storageparentdir": {
+										"value": "@variables('storageparentdir')",
+										"type": "Expression"
+									},
+									"database": {
+										"value": "@variables('databasename')",
+										"type": "Expression"
+									}
+								}
+							}
+						},
+						{
+							"name": "Wait 30s for Netezza limit",
+							"description": "max 120 queries per hour",
+							"type": "Wait",
+							"dependsOn": [
+								{
+									"activity": "Set Database Name",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Set Table Name",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Set Storage Parent Dir",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 30
+							}
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"tablename": {
+				"type": "String"
+			},
+			"storageparentdir": {
+				"type": "String"
+			},
+			"databasename": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "EDW2ADL"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-15T15:42:39Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

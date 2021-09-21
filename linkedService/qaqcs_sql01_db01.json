@@ -1,0 +1,19 @@
+{
+	"name": "qaqcs_sql01_db01",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=vg-adl-qaqcs-dev-sql01.database.windows.net;Initial Catalog=vg-adl-qaqcs-dev-db01;User ID=qaqcssqladmin",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "qaqcs_key_vault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "sql-sa-password"
+			}
+		}
+	}
+}

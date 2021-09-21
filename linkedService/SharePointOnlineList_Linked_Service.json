@@ -1,0 +1,21 @@
+{
+	"name": "SharePointOnlineList_Linked_Service",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SharePointOnlineList",
+		"typeProperties": {
+			"siteUrl": "https://volvogroup.sharepoint.com/sites/proj-qraftng/",
+			"tenantId": "f25493ae-1c98-41d7-8a33-0be75f5fe603",
+			"servicePrincipalId": "ad4c20d1-aa80-4835-ab36-d6848346cdab",
+			"servicePrincipalKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "qaqcs_key_vault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "sharepoint-client-secret"
+			}
+		}
+	}
+}

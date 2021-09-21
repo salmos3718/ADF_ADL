@@ -1,0 +1,22 @@
+{
+	"name": "PROD_NETEZZA_PROD_EDW_STOV",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Driver={NetezzaSQL};servername=edwprod.volvo.net;port=5480;database=PROD_EDW_STOV;",
+		"annotations": [],
+		"type": "Odbc",
+		"typeProperties": {
+			"connectionString": {
+				"type": "SecureString",
+				"value": "**********"
+			},
+			"authenticationType": "Basic",
+			"userName": "prod_dlsup_etl",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI0YTllYWJjNi0wYmE1LTQzNDktOTBiNC1kZjExY2RiYzZlMzgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "vgadlirdev01",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

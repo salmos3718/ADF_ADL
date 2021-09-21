@@ -1,0 +1,29 @@
+{
+	"name": "QA_NETTEZA_PROD_EDW_STOV",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Driver={NetezzaSQL};servername=edwdl.volvo.net;port=5480;database=PROD_EDW_STOV;",
+		"annotations": [],
+		"type": "Odbc",
+		"typeProperties": {
+			"connectionString": {
+				"type": "SecureString",
+				"value": "**********"
+			},
+			"authenticationType": "Basic",
+			"userName": "dev_dlsup_etl",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "Common_ADL_key_vault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "ADF-Netezza-devdlsupetl-pwd"
+			}
+		},
+		"connectVia": {
+			"referenceName": "vgadlirdev01",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

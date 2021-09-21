@@ -1,0 +1,11 @@
+{
+	"name": "qaqcs_key_vault",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://vg-adl-qaqcs-dev-kv01.vault.azure.net/"
+		}
+	}
+}

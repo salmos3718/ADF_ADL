@@ -1,0 +1,11 @@
+{
+	"name": "Common_ADL_key_vault",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://vg-adl-dev-kv1.vault.azure.net/"
+		}
+	}
+}

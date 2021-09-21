@@ -1,0 +1,122 @@
+{
+	"name": "STOV_UCHP_CASESOURCE_ACT_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "vgadlqaqcssa01",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Netezza_extracted"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"folderPath": "netezza/UCHP",
+				"fileSystem": "qaqcs"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "HUB_CASESOURCE_SID",
+				"type": "INT64"
+			},
+			{
+				"name": "CASESOURCE_KEY",
+				"type": "UTF8"
+			},
+			{
+				"name": "CASENOSOURCEID",
+				"type": "UTF8"
+			},
+			{
+				"name": "COMPANYNO",
+				"type": "INT64"
+			},
+			{
+				"name": "TYPEOFCONCERN",
+				"type": "INT64"
+			},
+			{
+				"name": "CODE",
+				"type": "UTF8"
+			},
+			{
+				"name": "DESCRIPTION",
+				"type": "UTF8"
+			},
+			{
+				"name": "NAME",
+				"type": "UTF8"
+			},
+			{
+				"name": "IBMSNAP_INTENTSEQ",
+				"type": "UTF8"
+			},
+			{
+				"name": "IBMSNAP_COMMITSEQ",
+				"type": "UTF8"
+			},
+			{
+				"name": "IBMSNAP_OPERATION",
+				"type": "UTF8"
+			},
+			{
+				"name": "IBMSNAP_LOGMARKER",
+				"type": "INT96"
+			},
+			{
+				"name": "EDW_CHECKSUM",
+				"type": "UTF8"
+			},
+			{
+				"name": "EDW_DQ_INFO",
+				"type": "UTF8"
+			},
+			{
+				"name": "RECORD_STATUS",
+				"type": "UTF8"
+			},
+			{
+				"name": "RECORD_SOURCE",
+				"type": "UTF8"
+			},
+			{
+				"name": "BATCH_ID",
+				"type": "INT64"
+			},
+			{
+				"name": "LOAD_ST_DATETIME",
+				"type": "INT96"
+			},
+			{
+				"name": "LOAD_END_DATETIME",
+				"type": "INT96"
+			},
+			{
+				"name": "DV_CURRENT_FLAG",
+				"type": "UTF8"
+			},
+			{
+				"name": "DV_VERSION",
+				"type": "INT32"
+			},
+			{
+				"name": "LOAD_DATETIME",
+				"type": "INT96"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

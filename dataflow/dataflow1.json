@@ -1,0 +1,32 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "vgadlqaqcssa01",
+						"type": "LinkedServiceReference"
+					},
+					"name": "CLAIMS"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "test",
+						"type": "DatasetReference"
+					},
+					"name": "test"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Select1"
+				}
+			],
+			"script": "source(output(\n\t\tVEHICLE_KEY as string,\n\t\tNATURAL_PRODUCT_ID as string,\n\t\tNATURAL_REPAIR_ID as string,\n\t\tNATURAL_CLAIM_JOB_ID as string,\n\t\tCLAIM_ID as string,\n\t\tCLAIM_JOB_ID as string,\n\t\tCAUSAL_PART_NO as string,\n\t\tMATERIAL_INSTR as string,\n\t\tHOURS as string,\n\t\tREGISTRATION_DATE as string,\n\t\tCAUSAL_PART_NOW_ID as string,\n\t\tCAUSAL_PART_NO_PREFIX as string,\n\t\tCLAIM_JOB_STATE as string,\n\t\tDEFECT_CODE as string,\n\t\tJOB_NO as string,\n\t\tFUNCTION_GROUP as string,\n\t\tSERIAL_NO_CAUSAL as string,\n\t\tSUPPLIER_NO as string,\n\t\tTYPE_OF_CLAIM as string,\n\t\tREF_JOB_NO as string,\n\t\tTYPE_OF_CONCERN as string,\n\t\tCOVERAGE_ID as string,\n\t\tUNPLANNED_STOP as string,\n\t\tCLAIM_REPAIR_HEADER_KEY as string,\n\t\tDEFECT_CODE_KEY as string,\n\t\tCLAIM_JOB_STATUS as string,\n\t\tCLAIM_JOB_STATUS_CODE as integer,\n\t\tCHASSIS_SERIES as string,\n\t\tCHASSIS_NO as string,\n\t\tREGISTRATION_NO as string,\n\t\tVIN as string,\n\t\tBRAND as integer,\n\t\tMARKETING_TYPE as string,\n\t\tAGE_VEHICLE as string,\n\t\tVEHICLE_MILAGE_KM as integer,\n\t\tREPAIRING_DEALER as string,\n\t\tREPAIR_ORDER_NO as string,\n\t\tREF_NO as integer,\n\t\tREPAIR_DATE as string,\n\t\tDELIVERING_IMPORTER as integer,\n\t\tDELIVERING_DEALER as string,\n\t\tCUSTOMER_NO as string,\n\t\tCURRENCY as string,\n\t\tREPAIR_REGISTRATION_DATE as string,\n\t\tEXCHANGE_RATE as double,\n\t\tCUSTOMER_NAME as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'qraft',\n\tfolderPath: 'uchp/final/CLAIMS2') ~> CLAIMS\nCLAIMS select(mapColumn(\n\t\tVEHICLE_KEY,\n\t\tNATURAL_PRODUCT_ID,\n\t\tNATURAL_REPAIR_ID,\n\t\tNATURAL_CLAIM_JOB_ID,\n\t\tCLAIM_ID,\n\t\tCLAIM_JOB_ID,\n\t\tCAUSAL_PART_NO,\n\t\tMATERIAL_INSTR,\n\t\tHOURS,\n\t\tREGISTRATION_DATE,\n\t\tCAUSAL_PART_NOW_ID,\n\t\tCAUSAL_PART_NO_PREFIX,\n\t\tCLAIM_JOB_STATE,\n\t\tDEFECT_CODE,\n\t\tJOB_NO,\n\t\tFUNCTION_GROUP,\n\t\tSERIAL_NO_CAUSAL,\n\t\tSUPPLIER_NO,\n\t\tTYPE_OF_CLAIM,\n\t\tREF_JOB_NO,\n\t\tTYPE_OF_CONCERN,\n\t\tCOVERAGE_ID,\n\t\tUNPLANNED_STOP,\n\t\tCLAIM_REPAIR_HEADER_KEY,\n\t\tDEFECT_CODE_KEY,\n\t\tCLAIM_JOB_STATUS,\n\t\tCLAIM_JOB_STATUS_CODE,\n\t\tCHASSIS_SERIES,\n\t\tCHASSIS_NO,\n\t\tREGISTRATION_NO,\n\t\tVIN,\n\t\tBRAND,\n\t\tMARKETING_TYPE,\n\t\tAGE_VEHICLE,\n\t\tVEHICLE_MILAGE_KM,\n\t\tREPAIRING_DEALER,\n\t\tREPAIR_ORDER_NO,\n\t\tREF_NO,\n\t\tREPAIR_DATE,\n\t\tDELIVERING_IMPORTER,\n\t\tDELIVERING_DEALER,\n\t\tCUSTOMER_NO,\n\t\tCURRENCY,\n\t\tREPAIR_REGISTRATION_DATE,\n\t\tEXCHANGE_RATE,\n\t\tCUSTOMER_NAME\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['test.csv'],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> test"
+		}
+	}
+}

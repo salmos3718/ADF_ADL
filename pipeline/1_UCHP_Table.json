@@ -179,16 +179,6 @@
 							},
 							{
 								"source": {
-									"name": "MATERIALINSTRDATE",
-									"type": "string"
-								},
-								"sink": {
-									"name": "MATERIAL_INSTR_DATE",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
 									"name": "MTRLREQID",
 									"type": "Int64"
 								},
@@ -205,26 +195,6 @@
 								"sink": {
 									"name": "MI_PRINT_STATUS",
 									"type": "Int64"
-								}
-							},
-							{
-								"source": {
-									"name": "MIPRINTSTATUSDATE",
-									"type": "string"
-								},
-								"sink": {
-									"name": "MI_PRINT_STATUS_DATE",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"name": "PARTSFITTEDDATE",
-									"type": "string"
-								},
-								"sink": {
-									"name": "PARTS_FITTED_DATE",
-									"type": "DateTime"
 								}
 							},
 							{
@@ -255,16 +225,6 @@
 								"sink": {
 									"name": "PART_OPERATING_HOURS",
 									"type": "Int64"
-								}
-							},
-							{
-								"source": {
-									"name": "REGISTRATIONDATE",
-									"type": "string"
-								},
-								"sink": {
-									"name": "REGISTRATION_DATE",
-									"type": "DateTime"
 								}
 							},
 							{
@@ -545,16 +505,6 @@
 								"sink": {
 									"name": "RECORD_STATUS",
 									"type": "string"
-								}
-							},
-							{
-								"source": {
-									"name": "LOAD_ST_DATETIME",
-									"type": "string"
-								},
-								"sink": {
-									"name": "SOURCE_LOAD_DATETIME",
-									"type": "DateTime"
 								}
 							}
 						]

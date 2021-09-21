@@ -228,48 +228,80 @@
 								}
 							},
 							{
+								"source": {
+									"name": "PARTSFITTEDDATE",
+									"type": "string"
+								},
 								"sink": {
 									"name": "PARTS_FITTED_DATE",
 									"type": "DateTime"
 								}
 							},
 							{
+								"source": {
+									"name": "AGEPART",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "PART_AGE",
 									"type": "Int64"
 								}
 							},
 							{
+								"source": {
+									"name": "PARTSMILAGE",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "PART_MILEAGE",
 									"type": "Int64"
 								}
 							},
 							{
+								"source": {
+									"name": "PARTOPERATINGHOURS",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "PART_OPERATING_HOURS",
 									"type": "Int64"
 								}
 							},
 							{
+								"source": {
+									"name": "REGISTRATIONDATE",
+									"type": "string"
+								},
 								"sink": {
 									"name": "REGISTRATION_DATE",
 									"type": "DateTime"
 								}
 							},
 							{
+								"source": {
+									"name": "REMARKCAUSE",
+									"type": "string"
+								},
 								"sink": {
 									"name": "REMARK_CAUSE",
 									"type": "string"
 								}
 							},
 							{
+								"source": {
+									"name": "REMARKCOMPLAINT",
+									"type": "string"
+								},
 								"sink": {
 									"name": "REMARK_COMPLAINT",
 									"type": "string"
 								}
 							},
 							{
+								"source": {
+									"name": "REMARKCORRECTION",
+									"type": "string"
+								},
 								"sink": {
 									"name": "REMARK_CORRECTION",
 									"type": "string"
@@ -296,6 +328,10 @@
 								}
 							},
 							{
+								"source": {
+									"name": "SERIALNOCAUSAL",
+									"type": "string"
+								},
 								"sink": {
 									"name": "SERIAL_NO_CAUSAL",
 									"type": "string"

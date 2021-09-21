@@ -100,18 +100,30 @@
 								}
 							},
 							{
+								"source": {
+									"name": "CLAIMJOBSTATE",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "CLAIM_JOB_STATE",
 									"type": "Int64"
 								}
 							},
 							{
+								"source": {
+									"name": "DEFECTCODE",
+									"type": "string"
+								},
 								"sink": {
 									"name": "DEFECT_CODE",
 									"type": "string"
 								}
 							},
 							{
+								"source": {
+									"name": "FOLLOWUPCODE",
+									"type": "string"
+								},
 								"sink": {
 									"name": "FOLLOW_UP_CODE",
 									"type": "string"
@@ -128,6 +140,10 @@
 								}
 							},
 							{
+								"source": {
+									"name": "FUNCTIONGROUP",
+									"type": "string"
+								},
 								"sink": {
 									"name": "FUNCTION_GROUP",
 									"type": "string"

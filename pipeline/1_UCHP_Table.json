@@ -592,7 +592,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "AzureDatabricksDeltaLakeDataset2",
+						"referenceName": "AzureDatabricksDeltaLakeDataset_UCHP_Source",
 						"type": "DatasetReference"
 					}
 				],

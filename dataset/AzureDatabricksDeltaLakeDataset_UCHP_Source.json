@@ -1,0 +1,16 @@
+{
+	"name": "AzureDatabricksDeltaLakeDataset_UCHP_Source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "GTT_Delta_Source",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureDatabricksDeltaLakeDataset",
+		"typeProperties": {
+			"database": "ds_uchp",
+			"table": "claimjob_hist"
+		},
+		"schema": []
+	}
+}

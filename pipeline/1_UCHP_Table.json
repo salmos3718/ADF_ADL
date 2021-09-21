@@ -338,42 +338,70 @@
 								}
 							},
 							{
+								"source": {
+									"name": "SUPPLIERNO",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "SUPPLIER_NO",
 									"type": "Int64"
 								}
 							},
 							{
+								"source": {
+									"name": "TYPEOFCLAIM",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "TYPE_OF_CLAIM",
 									"type": "Int64"
 								}
 							},
 							{
+								"source": {
+									"name": "TYPEOFCONCERN",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "TYPE_OF_CONCERN",
 									"type": "Int64"
 								}
 							},
 							{
+								"source": {
+									"name": "COVERAGEID",
+									"type": "string"
+								},
 								"sink": {
 									"name": "COVERAGE_ID",
 									"type": "string"
 								}
 							},
 							{
+								"source": {
+									"name": "HEADCLAIMHEADERID",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "HEAD_CLAIM_HEADER_ID",
 									"type": "Int64"
 								}
 							},
 							{
+								"source": {
+									"name": "NOTETODEALER",
+									"type": "string"
+								},
 								"sink": {
 									"name": "NOTE_TO_DEALER",
 									"type": "string"
 								}
 							},
 							{
+								"source": {
+									"name": "REFJOBNO",
+									"type": "Int64"
+								},
 								"sink": {
 									"name": "REF_JOB_NO",
 									"type": "Int64"

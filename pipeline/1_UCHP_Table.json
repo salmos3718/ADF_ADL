@@ -568,12 +568,20 @@
 								}
 							},
 							{
+								"source": {
+									"name": "LOAD_ST_DATETIME",
+									"type": "string"
+								},
 								"sink": {
 									"name": "SOURCE_LOAD_DATETIME",
 									"type": "DateTime"
 								}
 							},
 							{
+								"source": {
+									"name": "LOAD_ST_DATETIME",
+									"type": "string"
+								},
 								"sink": {
 									"name": "ODS_LOAD_DATETIME",
 									"type": "DateTime"
